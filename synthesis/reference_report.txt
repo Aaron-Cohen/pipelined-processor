@@ -1,0 +1,49 @@
+Information: Updating graph... (UID-83)
+Warning: Design 'proc' contains 2 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Information: Timing loop detected. (OPT-150)
+	fetch/Instruction_Memory/U19/B fetch/Instruction_Memory/U19/Y decode/control/U106/A decode/control/U106/Y fetch/U9/A fetch/U9/Y fetch/Instruction_Memory/U1113/A fetch/Instruction_Memory/U1113/Y 
+Information: Timing loop detected. (OPT-150)
+	decode/control/U106/B decode/control/U106/Y fetch/U9/A fetch/U9/Y fetch/Instruction_Memory/U1113/A fetch/Instruction_Memory/U1113/Y fetch/Instruction_Memory/U20/B fetch/Instruction_Memory/U20/Y 
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U19'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U20'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U18'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U17'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U16'
+         to break a timing loop. (OPT-314)
+ 
+****************************************
+Report : reference
+Design : proc
+Version: Q-2019.12-SP3
+Date   : Wed Mar 24 12:27:52 2021
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+BUFX2              gscl45nm       2.346500      16     37.543999  
+BUFX4              gscl45nm       2.815800       1      2.815800  
+INVX1              gscl45nm       1.407900      10     14.079000  
+INVX4              gscl45nm       3.285100       2      6.570200  
+decode                         3911.146134       1   3911.146134  h, n
+execute                        4475.714023       1   4475.714023  h
+fetch                         17126.633887       1  17126.633887  h, n
+memory                        15989.050690       1  15989.050690  h, n
+writeback                       286.272996       1    286.272996  h
+-----------------------------------------------------------------------------
+Total 9 references                                  41849.826729
+1

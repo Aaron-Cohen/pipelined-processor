@@ -1,0 +1,5 @@
+*.vcheck.out
+*archsim*
+*loadfile*
+*dump*
+*results*

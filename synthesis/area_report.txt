@@ -1,0 +1,32 @@
+ 
+****************************************
+Report : area
+Design : proc
+Version: Q-2019.12-SP3
+Date   : Wed Mar 24 12:27:52 2021
+****************************************
+
+Information: Updating design information... (UID-85)
+Warning: Design 'proc' contains 2 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Library(s) Used:
+
+    gscl45nm (File: /u/k/a/karu/courses/cs552/cad/Synopsys_Libraries/libs/gscl45nm.db)
+
+Number of ports:                         2047
+Number of nets:                         17027
+Number of cells:                        15214
+Number of combinational cells:          13813
+Number of sequential cells:              1168
+Number of macros/black boxes:               0
+Number of buf/inv:                       5881
+Number of references:                       9
+
+Combinational area:              32531.406136
+Buf/Inv area:                    10220.884475
+Noncombinational area:            9318.420593
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                 41849.826729
+Total area:                 undefined
+1

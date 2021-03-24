@@ -2,6 +2,9 @@
 clear
 
 # Run all tests, rename output summaries so they are not overwritten
+rm handin.time
+echo "Began at" > handin.time
+\date >> handin.time
 echo "\033[0;36mPlease keep in mind that this process will take a very long time. It may appear as if the terminal is hanging\33[0m"
 cd ../verilog
 rm -f *summary.log
@@ -39,3 +42,7 @@ cd ../scripts/
 vcheck_all.sh
 findfail.sh
 findslack.sh
+
+echo "\nEnded at" >> handin.time
+\date >> handin.time
+cat handin.time

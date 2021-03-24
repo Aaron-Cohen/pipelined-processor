@@ -1,0 +1,1313 @@
+
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+
+               Version Q-2019.12-SP3 for linux64 - Apr 21, 2020 
+
+                    Copyright (c) 1988 - 2020 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+            or distribution of this software is strictly prohibited.
+Initializing...
+echo "********** CS552 Reading files begin ********************"
+********** CS552 Reading files begin ********************
+set my_verilog_files [list adder.v shifter.v alu.v cla16.v cla4.v control.v decode.v dff.v execute.v fetch.v memory2c.syn.v memory.v proc.v reg16.v rf_bypass.v rf.v writeback.v  ]
+adder.v shifter.v alu.v cla16.v cla4.v control.v decode.v dff.v execute.v fetch.v memory2c.syn.v memory.v proc.v reg16.v rf_bypass.v rf.v writeback.v
+set my_toplevel proc
+proc
+define_design_lib WORK -path ./WORK
+1
+analyze -f verilog $my_verilog_files
+Running PRESTO HDLC
+Compiling source file ./adder.v
+Compiling source file ./shifter.v
+Compiling source file ./alu.v
+Compiling source file ./cla16.v
+Compiling source file ./cla4.v
+Compiling source file ./control.v
+Compiling source file ./decode.v
+Compiling source file ./dff.v
+Warning:  ./dff.v:15: delays for continuous assignment are ignored. (VER-173)
+Compiling source file ./execute.v
+Compiling source file ./fetch.v
+Compiling source file ./memory2c.syn.v
+Compiling source file ./memory.v
+Warning:  ./memory2c.syn.v:61: The statements in initial blocks are ignored. (VER-281)
+Compiling source file ./proc.v
+Compiling source file ./reg16.v
+Compiling source file ./rf_bypass.v
+Compiling source file ./rf.v
+Compiling source file ./writeback.v
+Presto compilation completed successfully.
+Loading db file '/u/k/a/karu/courses/cs552/cad/Synopsys_Libraries/libs/gscl45nm.db'
+1
+elaborate $my_toplevel -architecture verilog
+Loading db file '/s/synopsys-2020_06_08/@sys/syn/Q-2019.12-SP3/libraries/syn/gtech.db'
+Loading db file '/s/synopsys-2020_06_08/@sys/syn/Q-2019.12-SP3/libraries/syn/standard.sldb'
+  Loading link library 'gscl45nm'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Presto compilation completed successfully. (proc)
+Elaborated 1 design.
+Current design is now 'proc'.
+Information: Building the design 'fetch'. (HDL-193)
+Presto compilation completed successfully. (fetch)
+Information: Building the design 'decode'. (HDL-193)
+Presto compilation completed successfully. (decode)
+Information: Building the design 'execute'. (HDL-193)
+
+Statistics for case statements in always block at line 40 in file
+	'./execute.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            41            |    auto/auto     |
+===============================================
+Presto compilation completed successfully. (execute)
+Information: Building the design 'memory'. (HDL-193)
+Presto compilation completed successfully. (memory)
+Information: Building the design 'writeback'. (HDL-193)
+Presto compilation completed successfully. (writeback)
+Information: Building the design 'dff'. (HDL-193)
+
+Inferred memory devices in process
+	in routine dff line 17 in file
+		'./dff.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      state_reg      | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (dff)
+Information: Building the design 'cla16'. (HDL-193)
+Presto compilation completed successfully. (cla16)
+Information: Building the design 'memory2c'. (HDL-193)
+
+Inferred memory devices in process
+	in routine memory2c line 71 in file
+		'./memory2c.syn.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|       mem_reg       | Flip-flop |  512  |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Statistics for MUX_OPs
+======================================================
+| block name/line  | Inputs | Outputs | # sel inputs |
+======================================================
+|   memory2c/60    |   64   |    8    |      6       |
+|   memory2c/60    |   64   |    8    |      6       |
+======================================================
+Presto compilation completed successfully. (memory2c)
+Information: Building the design 'control'. (HDL-193)
+Warning:  ./control.v:82: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+
+Statistics for case statements in always block at line 24 in file
+	'./control.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            27            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 64 in file
+	'./control.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            82            |    auto/auto     |
+===============================================
+Presto compilation completed successfully. (control)
+Information: Building the design 'rf'. (HDL-193)
+Presto compilation completed successfully. (rf)
+Information: Building the design 'alu'. (HDL-193)
+Presto compilation completed successfully. (alu)
+Information: Building the design 'cla4'. (HDL-193)
+Presto compilation completed successfully. (cla4)
+Information: Building the design 'reg16'. (HDL-193)
+Presto compilation completed successfully. (reg16)
+Information: Building the design 'shifter'. (HDL-193)
+Presto compilation completed successfully. (shifter)
+Information: Building the design 'adder'. (HDL-193)
+Presto compilation completed successfully. (adder)
+1
+echo "********** CS552 Reading files end ********************"
+********** CS552 Reading files end ********************
+current_design proc
+Current design is 'proc'.
+{proc}
+#/* The name of the clock pin. If no clock-pin     */
+#/* exists, pick anything                          */
+set my_clock_pin clk
+clk
+#/* Target frequency in MHz for optimization       */
+set my_clk_freq_MHz 1000
+1000
+#/* Delay of input signals (Clock-to-Q, Package etc.)  */
+set my_input_delay_ns 0.1
+0.1
+#/* Reserved time for output signals (Holdtime etc.)   */
+set my_output_delay_ns 0.1
+0.1
+#/**************************************************/
+#/* No modifications needed below                  */
+#/**************************************************/
+set verilogout_show_unconnected_pins "true"
+true
+# analyze -f verilog $my_verilog_files
+# elaborate $my_toplevel -architecture verilog
+# current_design $my_toplevel
+report_hierarchy 
+ 
+****************************************
+Report : hierarchy
+Design : proc
+Version: Q-2019.12-SP3
+Date   : Wed Mar 24 12:24:41 2021
+****************************************
+
+Information: This design contains unmapped logic. (RPT-7)
+
+proc
+    decode
+        GTECH_AND2                               gtech
+        GTECH_BUF                                gtech
+        GTECH_NOT                                gtech
+        GTECH_OR2                                gtech
+        control
+            GTECH_AND2                           gtech
+            GTECH_BUF                            gtech
+            GTECH_NOT                            gtech
+            GTECH_OR2                            gtech
+        rf
+            GTECH_AND2                           gtech
+            GTECH_BUF                            gtech
+            GTECH_NOT                            gtech
+            GTECH_OR2                            gtech
+            reg16
+                GTECH_BUF                        gtech
+                GTECH_NOT                        gtech
+                dff
+                    GTECH_BUF                    gtech
+                    GTECH_NOT                    gtech
+    execute
+        GTECH_AND2                               gtech
+        GTECH_BUF                                gtech
+        GTECH_NOT                                gtech
+        GTECH_OR2                                gtech
+        alu
+            GTECH_AND2                           gtech
+            GTECH_BUF                            gtech
+            GTECH_NOT                            gtech
+            GTECH_OR2                            gtech
+            GTECH_XOR2                           gtech
+            cla16
+                GTECH_AND2                       gtech
+                GTECH_OR2                        gtech
+                cla4
+                    GTECH_AND2                   gtech
+                    GTECH_OR2                    gtech
+                    adder
+                        GTECH_XOR2               gtech
+            shifter
+                GTECH_BUF                        gtech
+                GTECH_NOT                        gtech
+        cla16
+            ...
+    fetch
+        GTECH_BUF                                gtech
+        GTECH_NOT                                gtech
+        cla16
+            ...
+        dff
+            ...
+        memory2c
+            GTECH_AND2                           gtech
+            GTECH_BUF                            gtech
+            GTECH_NOT                            gtech
+            GTECH_OR2                            gtech
+    memory
+        GTECH_OR2                                gtech
+        memory2c
+            ...
+    writeback
+        GTECH_AND2                               gtech
+        GTECH_BUF                                gtech
+        GTECH_NOT                                gtech
+        GTECH_OR2                                gtech
+1
+link
+
+  Linking design 'proc'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  gscl45nm (library)          /u/k/a/karu/courses/cs552/cad/Synopsys_Libraries/libs/gscl45nm.db
+
+1
+uniquify
+Information: Uniquified 144 instances of design 'dff'. (OPT-1056)
+Information: Uniquified 3 instances of design 'cla16'. (OPT-1056)
+Information: Uniquified 2 instances of design 'memory2c'. (OPT-1056)
+Information: Uniquified 12 instances of design 'cla4'. (OPT-1056)
+Information: Uniquified 8 instances of design 'reg16'. (OPT-1056)
+Information: Uniquified 48 instances of design 'adder'. (OPT-1056)
+1
+set my_period [expr 1000 / $my_clk_freq_MHz]
+1
+set find_clock [ find port [list $my_clock_pin] ]
+{clk}
+if {  $find_clock != [list] } {
+   set clk_name $my_clock_pin
+   create_clock -period $my_period $clk_name
+} else {
+   set clk_name vclk
+   create_clock -period $my_period -name $clk_name
+} 
+1
+set_driving_cell  -lib_cell INVX1  [all_inputs]
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+1
+set_input_delay $my_input_delay_ns -clock $clk_name [remove_from_collection [all_inputs] $my_clock_pin]
+1
+set_output_delay $my_output_delay_ns -clock $clk_name [all_outputs]
+1
+compile 
+Warning: Setting attribute 'fix_multiple_port_nets' on design 'proc'. (UIO-59)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | Q-2019.12-DWBB_201912.3 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+
+Information: There are 45 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'writeback'
+  Processing 'memory2c_0'
+  Processing 'memory'
+  Processing 'adder_0'
+  Processing 'cla4_0'
+  Processing 'cla16_0'
+  Processing 'shifter'
+  Processing 'alu'
+  Processing 'execute'
+  Processing 'dff_15'
+  Processing 'reg16_7'
+  Processing 'reg16_6'
+  Processing 'rf'
+  Processing 'control'
+  Processing 'decode'
+  Processing 'fetch'
+  Processing 'proc'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: Timing loop detected. (OPT-150)
+	fetch/Instruction_Memory/U17/B fetch/Instruction_Memory/U17/Y decode/control/U21/A decode/control/U21/Y decode/control/U46/A decode/control/U46/Y decode/control/U44/A decode/control/U44/Y fetch/U20/A fetch/U20/Y fetch/Instruction_Memory/U113/A fetch/Instruction_Memory/U113/Y fetch/Instruction_Memory/U1921/A fetch/Instruction_Memory/U1921/Y 
+Information: Timing loop detected. (OPT-150)
+	fetch/Instruction_Memory/U16/B fetch/Instruction_Memory/U16/Y decode/control/U16/A decode/control/U16/Y decode/control/U46/B decode/control/U46/Y decode/control/U44/A decode/control/U44/Y fetch/U20/A fetch/U20/Y fetch/Instruction_Memory/U113/A fetch/Instruction_Memory/U113/Y fetch/Instruction_Memory/U1921/A fetch/Instruction_Memory/U1921/Y 
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U17'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U16'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U19'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U20'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Y' on cell 'fetch/Instruction_Memory/U18'
+         to break a timing loop. (OPT-314)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'memory2c_0_DW01_inc_0'
+  Processing 'memory2c_1_DW01_inc_0_DW01_inc_1'
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+  Mapping Optimization (Phase 2)
+  Mapping Optimization (Phase 3)
+  Mapping Optimization (Phase 4)
+  Mapping Optimization (Phase 5)
+  Mapping Optimization (Phase 6)
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:47   34046.3      3.45    1900.8      21.9                          
+    0:00:47   34046.3      3.45    1900.8      21.9                          
+    0:00:53   36001.9      1.43     819.6      16.5                          
+    0:00:54   36001.9      1.43     819.6      16.5                          
+    0:00:54   36001.9      1.43     819.6      16.5                          
+    0:00:54   36001.9      1.43     819.6      16.5                          
+    0:00:54   36001.9      1.43     819.6      16.5                          
+    0:00:56   33784.4      1.93    1116.4      15.2                          
+    0:00:56   33832.3      2.47    1393.6      15.2                          
+    0:00:56   33820.1      2.52    1355.4      15.2                          
+    0:00:57   33826.7      1.66     936.7      15.2                          
+    0:00:57   33825.7      1.61     913.4      15.2                          
+    0:00:57   33826.2      1.61     913.4      15.2                          
+    0:00:57   33825.7      1.61     913.4      15.2                          
+    0:00:57   33826.7      1.58     892.8      15.2                          
+    0:00:57   33826.2      1.58     892.8      15.2                          
+    0:00:57   33826.2      1.58     892.8      15.2                          
+    0:00:58   33826.2      1.58     892.8      15.2                          
+    0:00:58   33826.2      1.58     892.8      15.2                          
+    0:00:58   33826.2      1.58     892.8      15.2                          
+    0:01:00   34049.6      1.82    1044.7      13.5                          
+    0:01:04   34219.5      1.86    1070.3      11.9                          
+    0:01:07   34289.4      1.88    1085.5      11.7                          
+    0:01:10   34357.5      1.89    1089.0      11.6                          
+    0:01:11   34416.6      1.94    1125.0      11.4                          
+    0:01:11   34445.2      1.94    1124.1      11.4                          
+    0:01:12   34481.3      1.96    1134.0      11.3                          
+    0:01:12   34516.5      1.96    1135.4      11.2                          
+    0:01:12   34539.5      1.96    1135.6      11.2                          
+    0:01:12   34539.5      1.96    1135.6      11.2                          
+    0:01:13   34855.4      1.62     927.2      11.2 fetch/pc_reg[14]/state_reg/D
+    0:01:13   34887.8      1.57     903.5      11.2 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:01:14   34968.5      1.54     888.0      11.2 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:01:14   34991.9      1.53     880.8      11.2 fetch/pc_reg[14]/state_reg/D
+    0:01:15   34990.5      1.52     878.3      11.2 decode/registers/registers[0]/registers[7]/state_reg/D
+    0:01:16   35083.5      1.50     863.8      11.3 decode/registers/registers[0]/registers[7]/state_reg/D
+    0:01:16   35089.1      1.49     855.1      11.3 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:01:16   35085.3      1.48     851.7      11.3 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:16   35029.5      1.48     851.4      11.3 fetch/pc_reg[14]/state_reg/D
+    0:01:17   35039.3      1.47     851.2      11.3 fetch/pc_reg[14]/state_reg/D
+    0:01:17   35042.6      1.46     847.4      11.3 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:01:18   35051.1      1.46     848.0      11.3 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:18   35052.5      1.45     845.7      11.3 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:01:19   35051.5      1.45     842.6      11.3 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:01:19   35055.3      1.44     836.8      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:19   35058.1      1.44     836.7      11.3                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:01:19   35058.1      1.44     836.7      11.3                          
+    0:01:19   35055.8      1.44     835.8      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:20   35064.2      1.44     834.8      11.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:20   35061.9      1.44     834.1      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:20   35065.2      1.43     829.4      11.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:20   35065.6      1.43     829.0      11.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:20   35071.7      1.42     828.4      11.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:20   35081.1      1.42     827.9      11.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:21   35083.9      1.42     826.9      11.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:21   35137.9      1.42     823.9      11.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:21   35146.8      1.41     823.2      11.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:21   35111.1      1.41     820.1      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:21   35107.9      1.41     819.5      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:22   35108.3      1.41     818.2      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:22   35112.6      1.41     818.1      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:22   35127.6      1.40     817.9      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:22   35137.4      1.40     816.8      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:22   35135.6      1.40     816.8      11.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:23   35129.0      1.39     813.5      11.4 fetch/pc_reg[15]/state_reg/D
+    0:01:23   35132.7      1.38     806.6      11.4 fetch/pc_reg[13]/state_reg/D
+    0:01:23   35136.0      1.38     806.4      11.4 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:23   35129.0      1.38     804.1      11.4 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:23   35121.9      1.38     793.9      11.4 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:23   35119.1      1.37     793.7      11.4 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:24   35125.2      1.37     796.8      11.4 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:24   35135.6      1.36     792.1      11.4 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:24   35135.6      1.36     791.0      11.4 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:24   35139.8      1.35     791.1      11.4 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:25   35142.6      1.35     789.4      11.4 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:25   35149.2      1.34     786.6      11.5 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:25   35139.3      1.34     783.2      11.5 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:25   35147.3      1.33     783.3      11.5 decode/registers/registers[0]/registers[7]/state_reg/D
+    0:01:25   35147.3      1.33     783.0      11.5 decode/registers/registers[0]/registers[6]/state_reg/D
+    0:01:25   35164.6      1.33     782.8      11.5 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:01:26   35175.9      1.32     782.9      11.5 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:26   35219.6      1.32     782.7      11.5 decode/registers/registers[0]/registers[5]/state_reg/D
+    0:01:26   35213.0      1.32     781.2      11.5 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:26   35220.0      1.32     781.0      11.5 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:26   35229.4      1.32     779.4      11.5 decode/registers/registers[0]/registers[5]/state_reg/D
+    0:01:26   35223.8      1.32     779.3      11.5 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:26   35230.4      1.31     778.2      11.5 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:01:26   35275.9      1.31     777.6      11.6 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:01:27   35280.1      1.31     777.0      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:27   35290.0      1.31     775.1      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:27   35295.6      1.31     771.2      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:27   35303.1      1.30     770.5      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:27   35293.2      1.30     769.6      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:27   35305.0      1.30     769.4      11.6 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:28   35313.4      1.29     765.1      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:28   35340.6      1.29     762.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:28   35352.8      1.29     764.1      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:28   35355.7      1.29     764.0      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:29   35360.3      1.28     762.3      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:29   35358.9      1.28     761.0      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:29   35366.9      1.28     760.4      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:29   35370.7      1.28     756.9      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:29   35379.6      1.27     755.2      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:30   35380.1      1.27     753.3      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:30   35381.0      1.27     751.6      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:30   35400.7      1.26     749.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:30   35401.6      1.26     747.6      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:30   35402.6      1.26     747.5      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:31   35404.0      1.26     747.2      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:31   35412.4      1.26     746.8      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:31   35419.5      1.25     745.6      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:31   35431.7      1.25     745.2      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:31   35455.1      1.25     744.6      11.6 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:01:31   35456.1      1.24     744.4      11.6 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:01:32   35519.4      1.24     743.3      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:32   35521.8      1.24     742.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:32   35527.9      1.24     741.4      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:32   35528.8      1.24     740.4      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:32   35529.8      1.24     740.4      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:32   35542.4      1.23     738.5      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:32   35537.7      1.23     738.4      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:33   35548.5      1.23     737.4      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:33   35558.9      1.23     737.1      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:33   35556.5      1.23     737.0      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:33   35557.5      1.23     736.5      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:33   35566.8      1.22     733.6      11.6 fetch/pc_reg[12]/state_reg/D
+    0:01:33   35572.5      1.22     733.2      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:33   35580.0      1.22     732.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:34   35573.4      1.22     731.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:34   35582.8      1.22     729.7      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:34   35582.8      1.22     729.7      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:34   35579.5      1.22     729.1      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:34   35578.1      1.21     727.6      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:34   35583.3      1.21     727.8      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:34   35593.6      1.21     727.5      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:35   35588.4      1.21     727.2      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:35   35600.2      1.21     727.0      11.6 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:01:35   35600.2      1.21     726.9      11.6 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:01:35   35611.4      1.20     726.7      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:35   35611.4      1.20     726.7      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:35   35609.5      1.20     724.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:36   35623.2      1.20     724.5      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:36   35630.7      1.20     723.6      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:36   35641.0      1.20     722.4      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:36   35642.4      1.20     721.6      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:36   35664.5      1.19     720.9      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:36   35677.1      1.19     720.8      11.6 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:01:36   35680.9      1.19     720.6      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:36   35683.2      1.19     720.4      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:36   35679.9      1.19     720.4      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:37   35683.7      1.19     719.9      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:37   35680.9      1.19     720.0      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:37   35692.6      1.18     722.5      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:37   35698.7      1.18     724.9      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:37   35704.8      1.18     724.7      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:37   35704.3      1.18     724.6      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:37   35702.5      1.18     724.5      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:38   35700.6      1.18     724.2      11.6 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:38   35708.1      1.18     723.9      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:38   35710.4      1.18     722.6      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:38   35719.4      1.17     722.3      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:38   35714.7      1.17     719.3      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:38   35714.2      1.17     718.8      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:38   35723.6      1.17     718.7      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:38   35746.6      1.17     715.7      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:39   35753.6      1.17     714.8      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:39   35750.8      1.16     714.6      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:39   35750.3      1.16     712.3      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:39   35758.8      1.16     709.8      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:39   35759.7      1.15     707.4      11.7 fetch/pc_reg[13]/state_reg/D
+    0:01:39   35766.3      1.15     710.1      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:39   35769.6      1.15     709.6      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:40   35766.3      1.15     709.4      11.7 fetch/pc_reg[13]/state_reg/D
+    0:01:40   35766.3      1.15     709.3      11.7 fetch/pc_reg[13]/state_reg/D
+    0:01:40   35772.4      1.15     709.1      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:40   35773.8      1.15     709.0      11.7 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:40   35774.3      1.15     709.2      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:40   35775.7      1.15     709.0      11.6 fetch/pc_reg[13]/state_reg/D
+    0:01:40   35776.6      1.14     708.2      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:40   35779.4      1.14     708.1      11.7 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:40   35793.5      1.14     708.0      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:41   35794.9      1.14     706.3      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:41   35797.3      1.14     705.6      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:41   35803.8      1.14     705.4      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:41   35808.5      1.14     705.2      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:41   35816.5      1.13     704.7      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:42   35822.1      1.13     704.4      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:42   35827.3      1.13     704.4      11.7 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:42   35836.2      1.13     704.3      11.7 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:42   35836.7      1.13     704.3      11.7 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:01:42   35834.3      1.13     704.2      11.7 decode/registers/registers[1]/registers[13]/state_reg/D
+    0:01:42   35834.3      1.13     703.8      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:42   35837.2      1.13     703.7      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:43   35839.5      1.13     703.0      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:43   35844.2      1.12     702.5      11.7 decode/registers/registers[2]/registers[4]/state_reg/D
+    0:01:43   35856.4      1.12     700.8      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:43   35855.0      1.12     700.4      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:43   35858.7      1.12     696.4      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:43   35868.6      1.11     695.8      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:44   35870.9      1.11     696.4      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:44   35874.7      1.11     696.4      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:44   35881.3      1.11     693.1      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:44   35880.3      1.11     692.0      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:44   35882.2      1.11     691.9      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:44   35885.0      1.11     691.9      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:45   35880.3      1.11     690.7      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:45   35882.2      1.10     690.4      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:45   35884.6      1.10     690.1      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:45   35886.0      1.10     690.1      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:45   35888.3      1.10     689.0      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:46   35885.5      1.10     690.0      11.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:46   35885.5      1.10     689.5      11.7 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:46   35886.4      1.10     687.9      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:46   35910.8      1.10     687.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:47   35920.2      1.09     687.6      11.6 decode/registers/registers[1]/registers[5]/state_reg/D
+    0:01:47   35909.0      1.09     687.3      11.6 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:01:47   35916.9      1.09     686.5      11.6 decode/registers/registers[1]/registers[5]/state_reg/D
+    0:01:47   35915.1      1.09     686.0      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:47   35926.3      1.09     685.9      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:47   35933.4      1.09     685.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:48   35938.1      1.09     685.8      11.6 decode/registers/registers[1]/registers[5]/state_reg/D
+    0:01:48   35933.8      1.09     685.6      11.6 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:01:48   35947.9      1.09     685.1      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:48   35955.4      1.09     684.9      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:48   35955.9      1.09     684.9      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:48   35958.7      1.09     684.9      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:49   35963.4      1.09     684.9      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:49   35964.3      1.09     684.0      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:49   35968.6      1.08     683.8      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:49   35965.3      1.08     682.8      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:50   35977.9      1.08     680.7      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:50   35976.1      1.08     680.7      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:50   35978.9      1.08     680.5      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:50   35985.5      1.08     680.4      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:50   35989.7      1.08     679.1      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:50   35992.0      1.08     679.0      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:50   35989.2      1.07     678.9      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:51   35992.5      1.07     678.9      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:51   35992.0      1.07     678.8      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:51   35992.5      1.07     678.7      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:51   35988.7      1.07     678.7      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:51   35993.4      1.07     678.7      11.6 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:01:51   35993.0      1.07     678.6      11.6 fetch/pc_reg[14]/state_reg/D
+    0:01:51   35994.4      1.07     678.5      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:51   35993.0      1.07     678.4      11.6 decode/registers/registers[0]/registers[6]/state_reg/D
+    0:01:51   36008.0      1.07     678.3      11.6 decode/registers/registers[1]/registers[11]/state_reg/D
+    0:01:52   36015.0      1.07     678.2      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:52   36013.6      1.07     678.2      11.6 decode/registers/registers[1]/registers[11]/state_reg/D
+    0:01:52   36019.2      1.07     678.1      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:52   36014.6      1.07     678.1      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:52   36024.4      1.07     678.0      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:52   36030.5      1.07     678.0      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:52   36034.3      1.06     676.8      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:53   36039.0      1.06     676.7      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:53   36059.1      1.06     676.6      11.6 decode/registers/registers[1]/registers[14]/state_reg/D
+    0:01:53   36064.3      1.06     676.5      11.6 fetch/pc_reg[14]/state_reg/D
+    0:01:53   36067.1      1.06     676.4      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:53   36067.6      1.06     676.3      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:54   36069.9      1.06     675.5      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:54   36069.9      1.06     675.4      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:54   36068.5      1.06     675.4      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:01:54   36071.8      1.06     675.4      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:54   36069.5      1.06     675.3      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:54   36154.9      1.06     675.3      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:54   36153.0      1.05     675.2      11.6 decode/registers/registers[0]/registers[6]/state_reg/D
+    0:01:54   36152.5      1.05     675.2      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:55   36148.3      1.05     676.8      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:55   36153.9      1.05     676.8      11.6 decode/registers/registers[1]/registers[5]/state_reg/D
+    0:01:55   36151.6      1.05     676.8      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:55   36153.9      1.05     676.7      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:55   36157.2      1.05     676.7      11.6 decode/registers/registers[0]/registers[8]/state_reg/D
+    0:01:55   36157.2      1.05     676.7      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:55   36158.6      1.05     676.7      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:56   36157.2      1.05     676.6      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:56   36154.4      1.05     676.6      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:56   36154.4      1.05     676.6      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:57   36158.2      1.05     676.5      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:57   36164.3      1.05     676.4      11.6 decode/registers/registers[1]/registers[11]/state_reg/D
+    0:01:57   36173.2      1.05     676.3      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:57   36175.1      1.05     675.3      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:57   36175.1      1.05     675.3      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:57   36176.9      1.05     672.2      11.6 fetch/pc_reg[14]/state_reg/D
+    0:01:57   36176.5      1.05     672.2      11.6 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:01:57   36174.1      1.05     672.1      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:57   36176.5      1.05     672.7      11.6 decode/registers/registers[0]/registers[12]/state_reg/D
+    0:01:57   36172.7      1.05     672.6      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:01:58   36174.6      1.05     672.6      11.6 decode/registers/registers[1]/registers[5]/state_reg/D
+    0:01:58   36176.5      1.05     672.5      11.6 decode/registers/registers[0]/registers[6]/state_reg/D
+    0:01:58   36178.8      1.05     672.5      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:58   36177.9      1.05     672.5      11.6 decode/registers/registers[1]/registers[5]/state_reg/D
+    0:01:58   36178.8      1.05     672.4      11.6 decode/registers/registers[0]/registers[9]/state_reg/D
+    0:01:58   36178.8      1.05     672.4      11.6 decode/registers/registers[0]/registers[9]/state_reg/D
+    0:01:58   36177.9      1.04     672.4      11.6 decode/registers/registers[0]/registers[9]/state_reg/D
+    0:01:58   36176.5      1.04     672.3      11.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:01:59   36175.5      1.04     672.0      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:59   36178.3      1.04     671.9      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:01:59   36180.7      1.04     671.9      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:01:59   36182.1      1.04     671.9      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:02:00   36182.1      1.04     671.9      11.6 fetch/pc_reg[14]/state_reg/D
+    0:02:00   36180.7      1.04     671.9      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:02:00   36187.7      1.04     671.8      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:02:00   36189.1      1.04     671.8      11.6 decode/registers/registers[1]/registers[3]/state_reg/D
+    0:02:00   36187.7      1.04     671.8      11.6 decode/registers/registers[1]/registers[1]/state_reg/D
+    0:02:00   36191.0      1.04     671.7      11.6 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:02:01   36191.0      1.04     671.7      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:02:02   36191.0      1.04     671.6      11.6 decode/registers/registers[1]/registers[0]/state_reg/D
+    0:02:03   36192.4      1.04     669.0      11.5 fetch/pc_reg[11]/state_reg/D
+    0:02:04   36192.4      1.04     668.8      11.5                          
+    0:02:04   36192.4      1.04     668.8      11.5                          
+
+
+  Beginning Design Rule Fixing  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:02:04   36192.4      1.04     668.8      11.5                          
+    0:02:04   36258.1      1.04     668.7      11.3 execute/alu/shifter/net99695
+    0:02:04   36317.2      1.04     668.7      11.2 memory/Data_Memory/net112548
+    0:02:04   36344.9      1.04     668.7      11.2 execute/alu/shifter/net99901
+    0:02:04   36380.1      1.04     668.7      11.1 decode/control/net101085 
+    0:02:04   36393.3      1.04     668.6      11.1 decode/registers/net100784
+    0:02:04   36397.0      1.04     668.6      11.1 decode/registers/net100813
+    0:02:04   36421.9      1.04     668.6      11.1 execute/alu/shifter/net99710
+    0:02:04   36469.3      1.04     668.0      11.0 execute/alu/cla16/adders[2]/net113890
+    0:02:04   36479.6      1.04     668.0      11.0 execute/alu/cla16/adders[0]/net99657
+    0:02:05   36516.7      1.04     668.0      10.9 execute/pc_addr_adder/adders[3]/net100210
+    0:02:05   36550.5      1.04     664.5      10.9 execute/net115941        
+    0:02:05   36599.3      1.04     664.5      10.9 memory/Data_Memory/net98201
+    0:02:05   36686.1      1.04     661.7      10.8 memory/Data_Memory/net98759
+    0:02:05   36774.8      1.04     658.8      10.7 memory/Data_Memory/net99425
+    0:02:05   36856.5      1.04     658.5      10.6 memory/Data_Memory/net97949
+    0:02:05   36869.1      1.04     657.8      10.6 fetch/net102797          
+    0:02:05   36869.1      1.04     657.8      10.6 decode/control/RegToPc   
+    0:02:05   36894.0      1.04     657.6      10.6 execute/alu/Out<9>       
+    0:02:05   36896.8      1.04     657.6      10.6 fetch/Instruction_Memory/C2243/net102392
+    0:02:05   36896.8      1.04     657.6      10.6 memory/Data_Memory/C2242/net96864
+    0:02:06   36896.8      1.04     657.6      10.6 fetch/Instruction_Memory/C2242/net101884
+    0:02:06   36898.7      1.04     657.6      10.6 memory/Data_Memory/C2243/net97398
+    0:02:06   36902.9      1.04     657.6      10.6 memory/Data_Memory/C2243/net97532
+    0:02:06   36907.6      1.04     657.6      10.6 fetch/Instruction_Memory/C2242/net101540
+    0:02:06   36925.0      1.04     657.6      10.6 fetch/pc_addr_adder/adders[2]/net102699
+    0:02:06   36938.6      1.04     657.6      10.5 memory/Data_Memory/C2242/net96722
+    0:02:06   36941.4      1.04     657.6      10.5 decode/registers/net101026
+    0:02:06   36951.3      1.04     657.6      10.5 memory/Data_Memory/C2242/net97062
+    0:02:06   36999.1      1.04     657.6      10.5 fetch/pc_addr_adder/adders[0]/net102748
+    0:02:07   37024.0      1.04     657.6      10.5 memory/Data_Memory/C2243/net97197
+    0:02:07   37055.5      1.04     657.6      10.5 execute/pc_addr_adder/adders[3]/net100206
+    0:02:07   37127.3      1.04     657.6      10.4 memory/Data_Memory/C2242/net97018
+    0:02:07   37178.9      1.04     657.6      10.4 execute/alu/shifter/net99670
+    0:02:07   37227.2      1.04     657.6      10.4 fetch/Instruction_Memory/C2243/net101989
+    0:02:07   37243.6      1.04     657.7      10.4 execute/pc_addr_adder/adders[3]/net100214
+    0:02:07   37276.5      1.04     656.2      10.4 execute/alu/net100162    
+    0:02:07   37292.0      1.04     656.2      10.4 memory/Data_Memory/C2242/net96971
+    0:02:07   37299.0      1.04     656.1      10.3 execute/alu/shifter/net99698
+    0:02:07   37306.1      1.04     656.1      10.3 memory/Data_Memory/C2242/net97099
+    0:02:07   37379.3      1.04     656.1      10.3 memory/Data_Memory/C2242/net96967
+    0:02:07   37431.8      1.04     656.1      10.3 fetch/Instruction_Memory/C2243/net102244
+    0:02:07   37453.9      1.04     656.1      10.3 execute/pc_addr_adder/adders[3]/GG
+    0:02:08   37461.9      1.04     656.1      10.3 execute/alu/net100077    
+    0:02:08   37481.1      1.04     656.1      10.2 writeback/net110233      
+    0:02:08   37522.9      1.04     656.1      10.2 memory/Data_Memory/C2243/net97876
+    0:02:08   37525.7      1.04     656.1      10.2 decode/registers/net100873
+    0:02:08   37609.2      1.04     656.1      10.2 execute/alu/shifter/net99908
+    0:02:08   37639.7      1.04     656.0      10.2 fetch/Instruction_Memory/C2243/net102469
+    0:02:08   37654.3      1.04     656.0      10.2 execute/alu/net100013    
+    0:02:08   37706.4      1.04     656.0      10.2 fetch/Instruction_Memory/n116
+    0:02:08   37845.8      1.04     656.0      10.2 fetch/Instruction_Memory/n188
+    0:02:08   37985.1      1.04     656.0      10.1 fetch/Instruction_Memory/n257
+    0:02:08   38124.5      1.04     656.0      10.1 fetch/Instruction_Memory/n329
+    0:02:08   38263.9      1.04     656.0      10.1 fetch/Instruction_Memory/n395
+    0:02:08   38403.3      1.04     656.0      10.1 fetch/Instruction_Memory/n462
+    0:02:08   38542.7      1.04     656.0      10.1 fetch/Instruction_Memory/n532
+    0:02:08   38682.1      1.04     656.0      10.1 fetch/Instruction_Memory/n600
+    0:02:08   38821.4      1.04     656.0      10.1 fetch/Instruction_Memory/n667
+    0:02:09   38960.8      1.04     656.0      10.0 fetch/Instruction_Memory/n736
+    0:02:09   39100.2      1.04     656.0      10.0 fetch/Instruction_Memory/n804
+    0:02:09   39239.6      1.04     656.0      10.0 fetch/Instruction_Memory/n874
+    0:02:09   39379.0      1.04     656.0      10.0 fetch/Instruction_Memory/n942
+    0:02:09   39518.3      1.04     656.0      10.0 fetch/Instruction_Memory/n1008
+    0:02:09   39657.7      1.04     656.0      10.0 fetch/Instruction_Memory/n1080
+    0:02:09   39797.1      1.04     656.0       9.9 fetch/Instruction_Memory/n1146
+    0:02:09   39936.5      1.04     656.0       9.9 fetch/Instruction_Memory/n1213
+    0:02:09   40075.9      1.04     656.0       9.9 fetch/Instruction_Memory/n1284
+    0:02:09   40215.3      1.04     656.0       9.9 fetch/Instruction_Memory/n1349
+    0:02:09   40273.9      1.04     656.0       9.9 execute/alu/shifter/net99736
+    0:02:09   40313.8      1.04     656.0       9.9 fetch/Instruction_Memory/n138
+    0:02:09   40405.3      1.04     656.0       9.8 fetch/Instruction_Memory/n239
+    0:02:09   40496.8      1.04     656.0       9.7 fetch/Instruction_Memory/n340
+    0:02:09   40588.3      1.04     656.0       9.6 fetch/Instruction_Memory/n439
+    0:02:09   40679.9      1.04     656.0       9.5 fetch/Instruction_Memory/n537
+    0:02:09   40771.4      1.04     656.0       9.5 fetch/Instruction_Memory/n637
+    0:02:09   40862.9      1.04     656.0       9.4 fetch/Instruction_Memory/n735
+    0:02:09   40954.4      1.04     656.0       9.3 fetch/Instruction_Memory/n835
+    0:02:10   41045.9      1.04     656.0       9.2 fetch/Instruction_Memory/n932
+    0:02:10   41137.4      1.04     656.0       9.1 fetch/Instruction_Memory/n1029
+    0:02:10   41228.9      1.04     656.0       9.1 fetch/Instruction_Memory/n1129
+    0:02:10   41320.5      1.04     656.0       9.0 fetch/Instruction_Memory/n1227
+    0:02:10   41412.0      1.04     656.0       8.9 fetch/Instruction_Memory/n1327
+    0:02:10   41476.7      1.04     656.0       8.9 writeback/net96317       
+    0:02:10   41521.3      1.04     656.1       8.8 execute/net100350        
+    0:02:10   41554.6      1.04     656.1       8.8 fetch/Instruction_Memory/n1377
+    0:02:10   41592.2      1.04     655.6       8.8 memory/Data_Memory/net97983
+    0:02:10   41607.2      1.04     654.5       8.8 memory/Data_Memory/net98104
+    0:02:10   41621.3      1.04     653.4       8.8 memory/Data_Memory/net98231
+    0:02:10   41633.9      1.04     652.4       8.8 memory/Data_Memory/net98353
+    0:02:10   41648.5      1.04     651.3       8.8 memory/Data_Memory/net98474
+    0:02:11   41662.6      1.04     650.2       8.8 memory/Data_Memory/net98596
+    0:02:11   41677.1      1.04     649.1       8.8 memory/Data_Memory/net98716
+    0:02:11   41691.7      1.04     648.0       8.8 memory/Data_Memory/net98838
+    0:02:11   41705.8      1.04     646.9       8.8 memory/Data_Memory/net98960
+    0:02:11   41720.3      1.04     645.8       8.8 memory/Data_Memory/net99080
+    0:02:11   41737.2      1.04     645.1       8.8 decode/control/net101058 
+    0:02:11   41740.9      1.04     645.1       8.8 execute/pc_addr_adder/adders[2]/net100230
+    0:02:11   41744.7      1.04     645.1       8.8 execute/net100342        
+    0:02:12   41745.6      1.04     645.1       8.7 memory/Data_Memory/C2243/net97306
+    0:02:12   41745.6      1.04     645.1       8.7 memory/Data_Memory/C2243/net97409
+    0:02:13   41745.6      1.04     645.1       8.7 execute/alu/net100064    
+    0:02:13   41745.6      1.04     645.1       8.7 execute/alu/shifter/net99858
+    0:02:13   41748.5      1.04     645.1       8.7 fetch/Instruction_Memory/C2243/net102160
+    0:02:13   41749.4      1.04     645.1       8.7 decode/control/net101028 
+    0:02:13   41755.0      1.04     645.1       8.7 execute/alu/shifter/net99878
+    0:02:13   41761.1      1.04     645.1       8.7 execute/alu/shifter/net99950
+    0:02:14   41774.3      1.04     645.1       8.7 memory/Data_Memory/C2243/net97601
+    0:02:14   41777.1      1.04     645.1       8.7 fetch/Instruction_Memory/C2243/net102507
+    0:02:14   41779.0      1.04     645.1       8.7 memory/Data_Memory/C2243/net97406
+    0:02:14   41781.8      1.04     645.1       8.7 execute/alu/shifter/net99761
+    0:02:14   41784.6      1.04     645.1       8.7 execute/alu/net100095    
+    0:02:15   41785.1      1.04     644.9       8.7 memory/Data_Memory/net99178
+    0:02:15   41799.1      1.04     643.8       8.7 memory/Data_Memory/net99298
+    0:02:15   41802.9      1.04     643.6       8.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:16   41803.8      1.04     643.3       8.7 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:16   41808.1      1.04     643.3       8.7 execute/alu/cla16/adders[0]/Cin
+    0:02:16   41833.9      1.04     643.2       8.6 execute/pc_addr_adder/adders[2]/B<0>
+    0:02:16   41832.0      1.04     643.2       8.6 execute/net104708        
+    0:02:16   41840.0      1.04     643.2       8.6 execute/alu/A<11>        
+    0:02:16   41840.0      1.04     643.2       8.6 fetch/Instruction_Memory/net108733
+    0:02:16   41847.0      1.04     643.2       8.6 decode/registers/net100792
+    0:02:17   41853.6      1.04     643.2       8.6 execute/alu/shifter/net99859
+    0:02:17   41855.9      1.04     643.2       8.6 execute/alu/cla16/Cin    
+    0:02:17   41859.7      1.04     643.2       8.6 memory/Data_Memory/C2242/net96917
+    0:02:18   41859.7      1.04     643.2       8.6 fetch/Instruction_Memory/C2242/net101777
+    0:02:18   41856.9      1.04     643.2       8.6 execute/alu/shifter/net99860
+    0:02:18   41862.5      1.04     643.2       8.6 fetch/Instruction_Memory/C2243/net102524
+    0:02:19   41861.6      1.04     643.2       8.6 decode/control/net101030 
+    0:02:19   41861.1      1.04     643.2       8.6 execute/alu/cla16/adders[2]/net99572
+    0:02:19   41863.4      1.04     643.2       8.6 fetch/Instruction_Memory/C2243/net102521
+    0:02:19   41865.8      1.04     643.2       8.6 execute/alu/shifter/net99870
+    0:02:20   41873.8      1.04     643.2       8.6 execute/pc_addr_adder/adders[3]/B<1>
+    0:02:21   41875.2      1.04     643.0       8.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:21   41873.3      1.03     642.8       8.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:21   41877.5      1.03     642.8       8.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:21   41876.1      1.04     646.5       8.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:22   41879.9      1.04     644.1       8.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:22   41879.9      1.04     644.1       8.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:22   41880.8      1.04     644.4       8.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:22   41880.8      1.04     644.4       8.6 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:22   41880.8      1.04     644.3       8.6 decode/registers/registers[4]/registers[2]/state_reg/D
+    0:02:23   41883.1      1.06     658.2       8.6 execute/alu/B<3>         
+    0:02:23   41937.6      1.11     679.8       8.4 execute/alu/A<5>         
+    0:02:23   41977.9      1.15     692.8       8.4 execute/alu/shifter/net99710
+    0:02:24   42052.1      1.19     713.8       8.2 execute/alu/B<12>        
+    0:02:24   42104.2      1.22     715.6       8.2 decode/registers/writedata<12>
+    0:02:24   42156.3      1.25     737.2       8.1 decode/registers/net100832
+    0:02:24   42192.4      1.25     739.1       8.0 execute/alu/net114453    
+    0:02:24   42248.7      1.28     755.7       8.0 execute/net100409        
+    0:02:24   42294.3      1.28     756.1       7.9 execute/alu/net100070    
+    0:02:25   42347.8      1.34     762.9       7.9 fetch/Instruction_Memory/C2242/net101127
+    0:02:25   42375.4      1.34     767.0       7.8 memory/Data_Memory/C2243/net97190
+    0:02:25   42377.8      1.35     774.2       7.8 fetch/Instruction_Memory/C2242/net101653
+    0:02:25   42382.5      1.40     794.8       7.8 execute/alu/net100139    
+    0:02:25   42391.4      1.42     806.5       7.8 fetch/Instruction_Memory/C2242/net101575
+    0:02:26   42400.3      1.42     811.1       7.8 execute/alu/cla16/adders[2]/net99578
+    0:02:26   42486.7      1.45     830.9       7.7 execute/alu/cla16/adders[0]/net99644
+    0:02:26   42555.7      1.48     832.8       7.7 memory/Data_Memory/C2243/net97321
+    0:02:26   42602.6      1.50     851.1       7.6 execute/alu/shifter_out<0>
+    0:02:26   42649.5      1.51     850.5       7.6 decode/registers/net101009
+    0:02:26   42715.7      1.51     856.0       7.5 execute/alu/net100146    
+    0:02:27   42807.2      1.52     858.9       7.5 fetch/Instruction_Memory/C2242/net101382
+    0:02:27   42851.8      1.57     877.1       7.4 fetch/Instruction_Memory/C2243/net102563
+    0:02:27   42904.8      1.63     903.2       7.4 memory/Data_Memory/C2243/net97200
+    0:02:27   42911.4      1.63     903.2       7.4 fetch/Instruction_Memory/C2243/net102425
+    0:02:27   42962.5      1.73     936.9       7.3 fetch/Instruction_Memory/C2242/net101779
+    0:02:27   42984.6      1.73     936.1       7.3 decode/registers/net100844
+    0:02:27   43058.3      1.75     951.4       7.2 execute/alu/shifter/net99704
+    0:02:28   43151.2      1.75     962.8       7.2 execute/net112720        
+    0:02:28   43222.1      1.75     964.9       7.2 execute/alu/cla16/adders[1]/net99608
+    0:02:28   43323.0      1.77     970.9       7.1 memory/Data_Memory/net98085
+    0:02:28   43430.9      1.77     972.0       7.1 memory/Data_Memory/net98245
+    0:02:28   43538.8      1.77     973.1       7.1 memory/Data_Memory/net98410
+    0:02:28   43646.8      1.77     974.2       7.1 memory/Data_Memory/net98563
+    0:02:28   43754.7      1.77     975.4       7.0 memory/Data_Memory/net98726
+    0:02:28   43862.7      1.77     976.5       7.0 memory/Data_Memory/net98890
+    0:02:29   43970.6      1.77     977.6       7.0 memory/Data_Memory/net99044
+    0:02:29   44078.5      1.77     978.7       7.0 memory/Data_Memory/net99208
+    0:02:29   44186.5      1.77     979.9       7.0 memory/Data_Memory/net99368
+    0:02:29   44294.4      1.77     980.9       6.9 execute/alu/net100116    
+    0:02:29   44377.9      1.78     986.8       6.9 decode/registers/net101012
+    0:02:29   44464.3      1.82    1001.9       6.8 memory/Data_Memory/C2242/net96457
+    0:02:30   44504.2      1.82    1002.3       6.8 execute/alu/shifter_out<8>
+    0:02:30   44559.6      1.85    1021.8       6.8 fetch/Instruction_Memory/C2243/net102582
+    0:02:30   44647.3      1.89    1045.1       6.8 fetch/Instruction_Memory/N113
+    0:02:30   44725.7      1.89    1045.2       6.8 fetch/Instruction_Memory/C2243/net102162
+    0:02:30   44758.5      1.89    1045.2       6.8 execute/alu/cla16/adders[0]/net99649
+    0:02:30   44842.1      1.89    1045.2       6.7 execute/alu/shifter/net99855
+    0:02:31   44918.6      1.90    1051.3       6.6 memory/Data_Memory/C2243/net97892
+    0:02:31   45003.5      1.90    1053.9       6.6 memory/Data_Memory/net113977
+    0:02:31   45093.6      1.92    1058.9       6.5 fetch/Instruction_Memory/C2243/net102505
+    0:02:31   45163.6      1.96    1090.3       6.4 writeback/net96352       
+    0:02:31   45186.1      1.99    1090.3       6.4 fetch/Instruction_Memory/C2242/net101127
+    0:02:32   45212.4      1.98    1086.7       6.4 execute/alu/cla16/adders[0]/C<2>
+    0:02:32   45315.6      2.07    1120.7       6.3 execute/net112320        
+    0:02:32   45333.9      2.07    1120.0       6.3 fetch/Instruction_Memory/C2243/net101905
+    0:02:33   45331.6      2.04    1108.4       6.3 fetch/pc_reg[13]/state_reg/D
+    0:02:33   45331.6      2.00    1108.3       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:33   45311.4      1.98    1085.3       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:33   45309.5      1.96    1082.7       6.3 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:33   45299.2      1.95    1073.9       6.3 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:34   45301.1      1.93    1066.1       6.3 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:34   45288.9      1.91    1063.8       6.3 decode/registers/registers[0]/registers[5]/state_reg/D
+    0:02:34   45285.6      1.91    1061.6       6.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:34   45281.3      1.89    1056.9       6.3 decode/registers/registers[1]/registers[11]/state_reg/D
+    0:02:34   45272.9      1.89    1057.5       6.3 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:34   45265.9      1.88    1051.8       6.3 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:35   45266.3      1.86    1042.8       6.3 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:35   45264.9      1.84    1035.5       6.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:35   45259.8      1.84    1035.3       6.3 fetch/pc_reg[13]/state_reg/D
+    0:02:35   45259.8      1.84    1035.1       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:35   45204.4      1.81    1030.0       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:36   45204.4      1.81    1023.5       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:36   45201.6      1.80    1019.2       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:36   45194.5      1.79    1017.1       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:36   45200.2      1.79    1016.9       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:36   45202.0      1.79    1016.8       6.3 decode/registers/registers[1]/registers[2]/state_reg/D
+    0:02:36   45197.3      1.79    1016.3       6.3 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:37   45199.2      1.79    1016.3       6.3 decode/registers/registers[1]/registers[5]/state_reg/D
+    0:02:37   45203.4      1.79    1015.8       6.3 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:02:37   45201.1      1.78    1015.4       6.3 decode/registers/registers[4]/registers[4]/state_reg/D
+    0:02:37   45194.1      1.78    1014.9       6.3 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:02:37   45180.4      1.78    1014.7       6.3 fetch/pc_reg[13]/state_reg/D
+    0:02:37   45173.9      1.77    1015.8       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:37   45172.9      1.77    1014.9       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:38   45159.8      1.77    1009.0       6.3 fetch/pc_reg[13]/state_reg/D
+    0:02:38   45160.3      1.76    1009.0       6.3 fetch/pc_reg[13]/state_reg/D
+    0:02:38   45154.2      1.76    1006.1       6.3 fetch/pc_reg[13]/state_reg/D
+    0:02:38   45154.6      1.75    1004.2       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:38   45151.8      1.75     993.2       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:38   45149.5      1.75     993.1       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:38   45152.8      1.74     992.9       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:39   45156.0      1.74     992.1       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:39   45153.2      1.74     990.8       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:39   45147.1      1.75     995.7       6.3 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:39   45144.3      1.75     995.5       6.3 decode/registers/registers[3]/registers[7]/state_reg/D
+    0:02:39   45141.5      1.74     994.2       6.3 fetch/pc_addr_adder/adders[2]/net102697
+    0:02:40   45153.2      1.74     994.2       6.3 fetch/Instruction_Memory/C2243/net102198
+    0:02:40   45156.0      1.74     994.6       6.3 memory/Data_Memory/C2243/net97661
+    0:02:40   45161.7      1.74     994.6       6.2 memory/Data_Memory/C2242/net96847
+    0:02:40   45163.1      1.74     994.6       6.2 memory/Data_Memory/C2242/net96463
+    0:02:40   45165.0      1.74     994.6       6.2 memory/Data_Memory/C2242/net96964
+    0:02:41   45168.7      1.74     994.5       6.2 decode/registers/net100988
+    0:02:41   45170.1      1.76    1002.6       6.2 decode/registers/net100925
+    0:02:41   45170.1      1.76    1001.2       6.2 decode/registers/net100934
+    0:02:41   45174.3      1.76    1001.1       6.2 memory/Data_Memory/C2243/net97256
+    0:02:41   45183.3      1.76    1001.0       6.2 memory/Data_Memory/C2242/net97084
+    0:02:42   45193.6      1.76    1001.0       6.2 fetch/Instruction_Memory/net112213
+    0:02:42   45188.9      1.82    1040.8       6.2 fetch/Instruction_Memory/net111372
+    0:02:42   45197.3      1.76    1004.0       6.2 memory/Data_Memory/C2242/net97010
+    0:02:43   45187.0      1.76    1003.4       6.2 decode/registers/registers[0]/registers[15]/state_reg/D
+    0:02:43   45188.9      1.76    1003.3       6.2 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:43   45186.5      1.76    1000.0       6.2 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:43   45186.1      1.75     997.6       6.2 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:44   45192.7      1.75     997.6       6.2 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:44   45191.7      1.74     993.9       6.2 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:44   45199.7      1.74     991.7       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:44   45203.4      1.73     991.4       6.2 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:44   45203.4      1.73     989.2       6.2 decode/registers/registers[3]/registers[5]/state_reg/D
+    0:02:44   45203.9      1.73     989.2       6.2 decode/registers/registers[2]/registers[7]/state_reg/D
+    0:02:45   45209.1      1.73     989.0       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:45   45204.4      1.72     988.8       6.2 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:45   45207.2      1.72     988.6       6.2 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:45   45200.6      1.72     988.5       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:45   45173.4      1.72     984.3       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:45   45165.9      1.72     984.2       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:45   45163.1      1.71     983.2       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:45   45149.0      1.71     982.8       6.2 decode/registers/registers[2]/registers[9]/state_reg/D
+    0:02:45   45149.0      1.71     982.7       6.2 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:46   45142.0      1.71     984.3       6.2 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:46   45142.4      1.71     984.2       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:46   45133.5      1.71     984.0       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:46   45132.1      1.71     983.0       6.2 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:46   45129.3      1.71     983.0       6.2 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:46   45126.9      1.71     982.9       6.2 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:47   45130.2      1.70     980.9       6.2 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:47   45133.5      1.70     978.4       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:47   45132.6      1.69     976.3       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:47   45133.5      1.69     975.2       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:47   45132.6      1.69     975.0       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:48   45133.5      1.70     979.8       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:48   45142.9      1.69     976.5       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:48   45139.6      1.69     976.8       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:48   45137.3      1.68     974.3       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:49   45132.1      1.68     970.4       6.2 decode/registers/registers[0]/registers[2]/state_reg/D
+    0:02:49   45135.9      1.67     963.6       6.2 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:02:49   45130.2      1.67     963.1       6.2 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:49   45138.7      1.66     956.6       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:49   45140.1      1.65     956.1       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:50   45142.9      1.65     955.1       6.2 decode/registers/registers[0]/registers[15]/state_reg/D
+    0:02:50   45141.0      1.65     954.8       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:50   45149.0      1.69     956.8       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:50   45157.5      1.67     955.4       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:50   45166.8      1.67     956.6       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:50   45166.8      1.66     954.4       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:51   45165.4      1.65     954.7       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:51   45171.5      1.64     953.7       6.2 decode/registers/registers[0]/registers[15]/state_reg/D
+    0:02:51   45171.1      1.64     953.5       6.2 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:02:51   45173.9      1.64     949.4       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:51   45174.8      1.64     948.2       6.2 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:51   45169.2      1.64     948.0       6.2 decode/registers/registers[0]/registers[3]/state_reg/D
+    0:02:52   45176.2      1.64     947.7       6.2 decode/registers/registers[0]/registers[15]/state_reg/D
+    0:02:52   45182.3      1.64     947.3       6.2 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:02:52   45186.1      1.63     945.8       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:52   45180.9      1.63     945.8       6.2 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:02:52   45193.1      1.63     944.6       6.2 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:02:52   45197.8      1.63     944.5       6.2 fetch/pc_reg[13]/state_reg/D
+    0:02:53   45195.9      1.63     944.0       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:53   45195.0      1.63     942.3       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:53   45199.2      1.62     941.8       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:53   45199.7      1.62     941.3       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:53   45203.4      1.62     941.2       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:54   45203.0      1.62     940.0       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:54   45206.7      1.62     939.8       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:54   45208.6      1.62     938.2       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:54   45207.7      1.62     936.4       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:54   45204.4      1.62     935.7       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:54   45204.9      1.61     935.7       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:55   45207.7      1.61     934.4       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:55   45217.5      1.61     933.4       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:55   45216.6      1.61     932.2       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:55   45220.3      1.61     931.0       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:55   45225.5      1.60     929.2       6.1 decode/registers/registers[0]/registers[1]/state_reg/D
+    0:02:56   45224.1      1.60     928.0       6.1 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:02:56   45230.7      1.60     928.0       6.1 decode/registers/registers[3]/registers[5]/state_reg/D
+    0:02:56   45233.9      1.60     927.9       6.1 fetch/pc_reg[14]/state_reg/D
+    0:02:56   45227.8      1.60     928.0       6.1 decode/registers/registers[0]/registers[4]/state_reg/D
+    0:02:56   45240.0      1.60     927.4       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:56   45236.8      1.59     927.2       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:57   45247.6      1.59     924.3       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:57   45251.3      1.59     922.2       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:57   45254.6      1.58     922.4       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:57   45261.2      1.58     920.4       6.1 decode/registers/registers[3]/registers[5]/state_reg/D
+    0:02:57   45263.5      1.58     919.9       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:57   45268.2      1.58     918.5       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:58   45271.0      1.57     916.5       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:58   45273.8      1.57     915.6       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:58   45276.2      1.57     914.8       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:58   45281.3      1.57     914.1       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:58   45287.0      1.57     914.0       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:58   45289.3      1.57     912.1       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:58   45287.0      1.57     912.6       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:59   45284.2      1.57     912.4       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:59   45288.4      1.57     911.8       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:59   45289.8      1.57     911.0       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:59   45294.5      1.57     910.5       6.1 fetch/pc_reg[13]/state_reg/D
+    0:02:59   45294.0      1.57     910.3       6.1 fetch/pc_reg[13]/state_reg/D
+    0:03:00   45290.7      1.57     908.3       6.1                          
+    0:03:00   45289.3      1.57     908.2       6.1                          
+    0:03:01   45286.5      1.57     908.2       6.1                          
+    0:03:01   45295.0      1.57     907.8       6.1                          
+    0:03:01   45292.1      1.57     907.4       6.1                          
+    0:03:01   45288.4      1.57     907.2       6.1                          
+    0:03:01   45279.5      1.57     906.8       6.1                          
+    0:03:01   45277.1      1.57     906.7       6.1                          
+    0:03:01   45275.7      1.57     906.7       6.1                          
+    0:03:01   45271.5      1.57     906.5       6.1                          
+    0:03:01   45269.1      1.57     906.5       6.1                          
+    0:03:01   45282.8      1.57     907.3       6.1                          
+    0:03:01   45281.8      1.57     901.6       6.1                          
+    0:03:01   45274.3      1.57     901.4       6.1                          
+    0:03:01   45270.6      1.57     901.2       6.1                          
+    0:03:01   45264.0      1.57     901.0       6.1                          
+    0:03:02   45261.2      1.57     900.9       6.1                          
+    0:03:02   45251.8      1.57     900.9       6.1                          
+    0:03:02   45246.2      1.57     900.9       6.1                          
+    0:03:02   45239.6      1.57     900.7       6.1                          
+    0:03:02   45223.2      1.57     900.6       6.1                          
+    0:03:02   45214.7      1.57     900.4       6.1                          
+    0:03:02   45211.9      1.57     900.1       6.1                          
+    0:03:02   45211.0      1.57     899.7       6.1                          
+    0:03:02   45209.1      1.57     899.4       6.1                          
+    0:03:02   45206.3      1.57     899.4       6.1                          
+    0:03:02   45206.3      1.57     899.3       6.1                          
+    0:03:02   45204.9      1.57     899.1       6.1                          
+    0:03:02   45203.4      1.57     899.1       6.1                          
+    0:03:02   45198.8      1.57     899.1       6.1                          
+    0:03:03   45196.4      1.57     899.0       6.1                          
+    0:03:03   45206.7      1.57     895.9       6.1                          
+    0:03:03   45210.5      1.57     895.0       6.1                          
+    0:03:03   45206.3      1.57     892.6       6.1                          
+    0:03:03   45203.0      1.57     886.2       6.1                          
+    0:03:03   45249.9      1.56     883.6       6.1                          
+    0:03:03   45287.9      1.56     882.5       6.1                          
+    0:03:03   45310.9      1.56     881.9       6.1                          
+    0:03:03   45333.4      1.56     881.3       6.1                          
+    0:03:03   45356.0      1.56     880.7       6.1                          
+    0:03:03   45378.5      1.56     880.1       6.1                          
+    0:03:03   45376.6      1.56     879.0       6.1                          
+    0:03:03   45387.9      1.56     877.3       6.1                          
+    0:03:03   45408.5      1.56     875.2       6.1                          
+    0:03:04   45420.7      1.56     873.8       6.1                          
+    0:03:04   45425.4      1.56     873.1       6.1                          
+    0:03:04   45430.1      1.56     872.4       6.1                          
+    0:03:04   45434.8      1.56     871.6       6.1                          
+    0:03:04   45439.5      1.56     870.9       6.1                          
+    0:03:04   45444.2      1.56     870.2       6.1                          
+    0:03:04   45445.6      1.56     869.6       6.1                          
+    0:03:04   45450.3      1.56     868.6       6.1                          
+    0:03:04   45467.7      1.56     868.1       6.1                          
+    0:03:04   45480.8      1.56     867.2       6.1                          
+    0:03:04   45466.3      1.56     866.8       6.1                          
+    0:03:04   45453.6      1.56     866.1       6.1                          
+    0:03:04   45447.9      1.56     865.4       6.1                          
+    0:03:04   45430.6      1.56     864.6       6.1                          
+    0:03:04   45436.7      1.56     864.1       6.1                          
+    0:03:04   45436.2      1.56     863.8       6.1                          
+    0:03:04   45440.4      1.56     863.1       6.1                          
+    0:03:04   45455.0      1.56     862.3       6.1                          
+    0:03:04   45457.3      1.56     861.8       6.1                          
+    0:03:04   45452.6      1.56     861.2       6.1                          
+    0:03:05   45456.4      1.56     861.1       6.1                          
+    0:03:05   45461.1      1.56     861.0       6.1                          
+    0:03:05   45462.5      1.56     860.9       6.1                          
+    0:03:05   45465.3      1.56     860.9       6.1                          
+    0:03:05   45470.5      1.56     860.8       6.1                          
+    0:03:05   45478.9      1.56     860.6       6.1                          
+    0:03:05   45478.9      1.56     860.6       6.1                          
+    0:03:05   45479.4      1.56     860.6       6.1                          
+    0:03:05   45482.7      1.56     860.3       6.1                          
+    0:03:05   45482.7      1.56     859.9       6.1                          
+    0:03:05   45468.1      1.56     858.9       6.1                          
+    0:03:05   45470.9      1.56     858.4       6.1                          
+    0:03:05   45470.9      1.56     858.4       6.1                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:03:05   45470.9      1.56     858.4       6.1                          
+    0:03:05   45470.9      1.56     858.4       6.1                          
+    0:03:07   43107.1      1.64     903.9       6.1                          
+    0:03:07   42705.4      1.59     875.4       6.1                          
+    0:03:07   42574.4      1.58     880.3       6.1                          
+    0:03:08   42508.3      1.59     881.6       6.1                          
+    0:03:08   42486.7      1.59     881.6       6.1                          
+    0:03:08   42465.5      1.59     881.6       6.1                          
+    0:03:08   42449.6      1.59     881.6       6.1                          
+    0:03:08   42435.5      1.59     881.6       6.1                          
+    0:03:08   42423.3      1.59     881.6       6.1                          
+    0:03:08   42412.5      1.59     881.6       6.1                          
+    0:03:08   42400.3      1.59     881.6       6.1                          
+    0:03:08   42389.5      1.59     881.6       6.1                          
+    0:03:08   42377.8      1.59     881.6       6.1                          
+    0:03:08   42370.3      1.59     881.6       6.1                          
+    0:03:08   42359.5      1.59     881.6       6.1                          
+    0:03:08   42349.2      1.59     881.6       6.1                          
+    0:03:09   42344.9      1.59     881.6       6.1                          
+    0:03:09   42344.9      1.59     881.6       6.1                          
+    0:03:09   42344.9      1.59     881.6       6.1                          
+    0:03:09   42242.2      1.59     886.3       6.1                          
+    0:03:09   42233.7      1.59     886.3       6.1                          
+    0:03:09   42233.7      1.59     886.3       6.1                          
+    0:03:09   42233.7      1.59     886.3       6.1                          
+    0:03:09   42233.7      1.59     886.3       6.1                          
+    0:03:09   42233.7      1.59     886.3       6.1                          
+    0:03:09   42233.7      1.59     886.3       6.1                          
+    0:03:09   42233.7      1.59     882.2       6.1 decode/registers/registers[3]/registers[5]/state_reg/D
+    0:03:10   42232.8      1.58     875.0       6.1 decode/registers/registers[3]/registers[5]/state_reg/D
+    0:03:10   42239.3      1.57     872.9       6.1 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:03:10   42241.2      1.56     872.3       6.1 decode/registers/registers[3]/registers[5]/state_reg/D
+    0:03:10   42237.0      1.56     872.4       6.1 fetch/pc_reg[13]/state_reg/D
+    0:03:10   42246.4      1.56     872.3       6.1 fetch/pc_reg[13]/state_reg/D
+    0:03:10   42248.7      1.56     872.3       6.1 decode/registers/registers[0]/registers[0]/state_reg/D
+    0:03:10   42245.4      1.56     872.3       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:11   42251.5      1.56     872.5       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:11   42249.2      1.56     872.4       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:11   42250.6      1.56     873.1       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:11   42249.7      1.56     870.8       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:11   42250.1      1.56     870.7       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:11   42250.1      1.56     868.8       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:11   42250.1      1.56     868.3       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:12   42250.1      1.56     867.9       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:12   42253.9      1.56     867.4       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:12   42255.8      1.56     866.4       6.1 decode/registers/registers[1]/registers[7]/state_reg/D
+    0:03:12   42241.7      1.55     863.9       6.1                          
+    0:03:12   42235.6      1.55     863.9       6.1                          
+    0:03:12   42233.2      1.55     863.9       6.1                          
+    0:03:12   42223.9      1.55     863.7       6.1                          
+    0:03:12   42213.5      1.55     863.7       6.1                          
+    0:03:12   42207.9      1.55     863.5       6.1                          
+    0:03:13   42203.7      1.55     863.3       6.1                          
+    0:03:13   42185.8      1.55     863.0       6.1                          
+    0:03:13   42184.4      1.55     863.0       6.1                          
+    0:03:13   42169.0      1.55     862.9       6.1                          
+    0:03:13   42158.2      1.55     860.1       6.1                          
+    0:03:13   42135.6      1.55     860.1       6.1                          
+    0:03:13   42110.8      1.55     860.1       6.1                          
+    0:03:13   42096.2      1.55     860.0       6.1                          
+    0:03:13   42080.7      1.55     860.0       6.1                          
+    0:03:14   42071.8      1.55     860.0       6.1                          
+    0:03:14   42057.3      1.55     859.9       6.1                          
+    0:03:14   42036.1      1.55     859.9       6.1                          
+    0:03:14   42015.0      1.55     859.9       6.1                          
+    0:03:14   41993.9      1.55     859.9       6.1                          
+    0:03:14   41970.4      1.55     859.9       6.1                          
+    0:03:14   41949.3      1.55     859.9       6.1                          
+    0:03:14   41926.8      1.55     859.9       6.1                          
+    0:03:14   41913.2      1.55     859.9       6.1                          
+    0:03:15   41899.1      1.55     859.9       6.1                          
+    0:03:15   41891.1      1.55     859.9       6.1                          
+    0:03:15   41850.8      1.55     859.9       6.1                          
+    0:03:15   41784.1      1.55     859.9       6.1                          
+    0:03:15   41770.5      1.55     859.9       6.1                          
+    0:03:15   41770.5      1.55     859.8       6.1                          
+    0:03:15   41771.0      1.55     858.9       6.1                          
+    0:03:16   41773.8      1.54     858.5       6.1                          
+    0:03:16   41774.3      1.54     858.7       6.1                          
+    0:03:16   41775.7      1.54     858.4       6.1                          
+    0:03:16   41778.5      1.54     858.4       6.1                          
+    0:03:16   41779.0      1.54     858.3       6.1                          
+    0:03:16   41778.5      1.54     858.3       6.1                          
+    0:03:16   41787.9      1.54     857.9       6.1                          
+    0:03:16   41790.2      1.54     857.9       6.1                          
+    0:03:16   41795.9      1.54     857.9       6.1                          
+    0:03:16   41793.5      1.54     857.8       6.1                          
+    0:03:17   41796.8      1.54     857.5       6.1                          
+    0:03:17   41797.3      1.54     857.4       6.1                          
+    0:03:17   41798.7      1.54     857.4       6.1                          
+    0:03:17   41798.2      1.54     857.3       6.1                          
+    0:03:17   41799.6      1.54     857.2       6.1                          
+    0:03:17   41802.9      1.54     857.1       6.1                          
+    0:03:17   41802.9      1.54     857.1       6.1                          
+    0:03:17   41804.8      1.54     857.0       6.1                          
+    0:03:17   41807.6      1.54     856.8       6.1                          
+    0:03:17   41807.6      1.54     856.7       6.1                          
+    0:03:18   41810.9      1.54     856.4       6.1                          
+    0:03:18   41814.2      1.54     856.3       6.1                          
+    0:03:18   41811.8      1.54     853.4       6.1                          
+    0:03:18   41812.3      1.54     853.3       6.1                          
+    0:03:18   41814.2      1.54     853.2       6.1                          
+    0:03:18   41814.6      1.54     853.2       6.1                          
+    0:03:18   41816.0      1.54     853.2       6.1                          
+    0:03:18   41814.6      1.54     853.0       6.1                          
+    0:03:18   41813.2      1.54     852.7       6.1                          
+    0:03:18   41814.6      1.54     852.5       6.1                          
+    0:03:18   41812.3      1.54     852.5       6.1                          
+    0:03:18   41814.2      1.54     852.4       6.1                          
+    0:03:18   41814.6      1.54     852.2       6.1                          
+    0:03:19   41817.0      1.54     852.1       6.1                          
+    0:03:19   41818.4      1.54     848.1       6.1                          
+    0:03:19   41822.6      1.54     846.8       6.1                          
+    0:03:19   41822.6      1.54     842.5       6.1                          
+    0:03:19   41821.7      1.54     840.3       6.1                          
+    0:03:19   41819.8      1.54     840.2       6.1                          
+    0:03:19   41824.0      1.54     840.0       6.1                          
+    0:03:19   41833.9      1.54     839.7       6.1                          
+    0:03:19   41836.7      1.54     839.7       6.1                          
+    0:03:19   41837.2      1.54     839.5       6.1                          
+    0:03:19   41840.0      1.54     839.0       6.1                          
+    0:03:20   41840.0      1.54     838.9       6.1                          
+    0:03:20   41842.8      1.54     838.7       6.1                          
+    0:03:20   41843.3      1.54     838.6       6.1                          
+    0:03:20   41846.1      1.54     838.5       6.1                          
+    0:03:20   41845.6      1.54     838.5       6.1 fetch/pc_reg[13]/state_reg/D
+    0:03:20   41845.6      1.53     837.1       6.1 fetch/pc_reg[13]/state_reg/D
+    0:03:21   41843.3      1.53     837.0       6.1 fetch/pc_reg[13]/state_reg/D
+    0:03:21   41847.5      1.53     836.9       6.1 fetch/pc_reg[13]/state_reg/D
+    0:03:21   41849.8      1.53     836.9       6.1 fetch/pc_reg[13]/state_reg/D
+Loading db file '/u/k/a/karu/courses/cs552/cad/Synopsys_Libraries/libs/gscl45nm.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Warning: Design 'proc' contains 2 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+     Net 'decode/registers/registers[1]/registers[0]/clk': 1168 load(s), 1 driver(s)
+     Net 'fetch/pc_addr_adder/adders[0]/adders[2]/B': 1003 load(s), 1 driver(s)
+1
+check_design -summary
+ 
+****************************************
+check_design summary:
+Version:     Q-2019.12-SP3
+Date:        Wed Mar 24 12:27:50 2021
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Inputs/Outputs                                                      6
+    Unconnected ports (LINT-28)                                     2
+    Constant outputs (LINT-52)                                      4
+
+Cells                                                              40
+    Connected to power or ground (LINT-32)                         36
+    Nets connected to multiple pins on same cell (LINT-33)          4
+
+Nets                                                                1
+    Unloaded nets (LINT-2)                                          1
+--------------------------------------------------------------------------------
+
+Information: Use the 'check_design' command for 
+	 more information about warnings. (LINT-98)
+
+1
+set filename [format "%s%s"  $my_toplevel ".syn.v"]
+proc.syn.v
+write -hierarchy -f verilog $my_toplevel -output synth/$filename
+Writing verilog file '/afs/cs.wisc.edu/u/a/a/aaronc/CS552/project/pipelined-processor/verilog/synth/proc.syn.v'.
+Warning: Bus naming style currently specified as %s<%d>, verilog syntax requires bus naming style to be "[]".  (VO-13)
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+1
+set filename [format "%s%s"  $my_toplevel ".ddc"]
+proc.ddc
+write -hierarchy -format ddc -output synth/$filename
+Writing ddc file 'synth/proc.ddc'.
+1
+report_hierarchy > synth/hierarchy.txt
+report_reference > synth/reference_report.txt
+report_area > synth/area_report.txt
+report_cell > synth/cell_report.txt
+report_timing -max_paths 20 > synth/timing_report.txt
+report_power > synth/power_report.txt
+quit
+
+Memory usage for this session 143 Mbytes.
+Memory usage for this session including child processes 143 Mbytes.
+CPU usage for this session 189 seconds ( 0.05 hours ).
+Elapsed time for this session 206 seconds ( 0.06 hours ).
+
+Thank you...
