@@ -18,7 +18,8 @@ wire [3:0] ALUOp_cntrl;
 wire [1:0] ALUSrc_cntrl;
 wire Jump_cntrl, Branch_cntrl, MemRead_cntrl, MemToReg_cntrl,
 	MemWrite_cntrl, RegWrite_cntrl, PcToReg_cntrl, RegToPc_cntrl,
-	ALU_InvA_cntrl, ALU_InvB_cntrl, ALU_Cin_cntrl, Halt_cntrl;
+	ALU_InvA_cntrl, ALU_InvB_cntrl, ALU_Cin_cntrl, Halt_cntrl,
+	SIIC_cntrl;
 
 wire [15:0] Instruction, PC_Inc, PC_Next, ALU_Out;
 fetch fetch(
@@ -29,6 +30,7 @@ fetch fetch(
 	.PC_Next(PC_Next),
 	.ALU_Out(ALU_Out),
 	.RegToPc_cntrl(RegToPc_cntrl),
+	.SIIC_cntrl(SIIC_cntrl),
 	.Halt_cntrl(Halt_cntrl),
 	.clk(clk),
 	.rst(rst)
@@ -58,6 +60,7 @@ decode decode(
 	// Inputs
 	.Instruction(Instruction),
 	.Writeback_data(Writeback_data),
+	.SIIC_cntrl(SIIC_cntrl),
 	.clk(clk),
 	.rst(rst)
 );

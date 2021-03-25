@@ -5,6 +5,7 @@ module fetch(
 	input  [15:0] PC_Next,
 	input  [15:0] ALU_Out,
 	input RegToPc_cntrl,
+	input SIIC_cntrl,
 	input Halt_cntrl,
 	input clk,
 	input rst
@@ -17,7 +18,8 @@ module fetch(
 
 // Mux to select which PC value to use:
 wire [15:0] pc_mux;
-assign pc_mux = RegToPc_cntrl ? ALU_Out : PC_Next;
+assign pc_mux =	RegToPc_cntrl ? ALU_Out :
+		SIIC_cntrl ? 16'h0002 : PC_Next;
 
 
 wire [15:0] pc;

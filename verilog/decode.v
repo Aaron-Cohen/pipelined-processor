@@ -12,6 +12,7 @@ module decode(
 	output ALU_InvA_cntrl,
 	output ALU_InvB_cntrl,
 	output ALU_Cin_cntrl,
+	output SIIC_cntrl,
 	output Halt_cntrl,
 	output [3:0] ALUOp_cntrl,
 	output [1:0] ALUSrc_cntrl,
@@ -48,6 +49,7 @@ control control(
 	.ALU_InvA(ALU_InvA_cntrl),
 	.ALU_InvB(ALU_InvB_cntrl),
 	.ALU_Cin(ALU_Cin_cntrl),
+	.SIIC(SIIC_cntrl),
 	.Halt(Halt_cntrl),
 	.err(control_err)
 );
@@ -60,8 +62,16 @@ assign write_reg_sel = PcToReg_cntrl ? 3'h7 :
 	regDst_cntrl[1] ? Instruction[10:8] :
         regDst_cntrl[0]	? Instruction[4:2]  : Instruction[7:5];
 
+// EPC feeds back its output when exception is not asserted, only updated when
+// exception. Writeback data will be the PC+2 from PcToReg being asserted.
+wire[15:0] EPC;
+dff EPC_reg [15:0]( .q(EPC), .d(SIIC_cntrl ? Writeback_data : EPC), .rst(rst), .clk(clk));
+
+wire [15:0] r1data;
+assign Read1data = SIIC_cntrl ? EPC : r1data;
+
 // Register center with bypass to read/write same data concurrently
-rf registers(.read1data(Read1data), .read2data(Read2data), .err(register_err),
+rf registers(.read1data(r1data), .read2data(Read2data), .err(register_err),
 	.clk(clk), .rst(rst), .read1regsel(Instruction[10:8]), .read2regsel(Instruction[7:5]),
 	.writeregsel(write_reg_sel), .writedata(Writeback_data), .write(RegWrite_cntrl));
 

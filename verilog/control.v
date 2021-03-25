@@ -15,6 +15,7 @@ module control(
 	output reg ALU_InvB,
 	output reg ALU_Cin,
 	output reg Halt,
+	output reg SIIC,
 	output reg err,
 	output     MemToReg
 );
@@ -64,6 +65,7 @@ assign MemToReg = MemRead; // If we are electing to read memory, we can assume w
 always @(*) begin
 	Halt 	 = 1'b0;
 	err 	 = 1'b0;
+	SIIC     = 1'b0;
 
 	// ALU Control signals
 	ALU_Cin  = 1'b0;
@@ -341,11 +343,15 @@ always @(*) begin
 			ALUOp = 4'bXXXX;
 			ALUSrc = 4'bXXXX;
 			RegDst = 2'bXX;
+			SIIC = 1'b1;
+			PcToReg = 1'b1;
 		end	
 		5'b00011 : begin // NOP / RTI
-			ALUOp = 4'bXXXX;
+			ALUOp = 4'b1111; // ALU A
 			ALUSrc = 4'bXXXX;
 			RegDst = 2'bXX;
+			SIIC = 1'b1;
+			RegToPc = 1'b1;
 		end
 		default : begin
 			err = 1;
