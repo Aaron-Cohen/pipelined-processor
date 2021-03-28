@@ -1,37 +1,43 @@
+`default_nettype none
 module decode(
-	output [15:0] Read1data,
-	output [15:0] Read2data,
-	output err,
-	output Jump_cntrl,
-	output Branch_cntrl,
-	output MemRead_cntrl,
-	output MemToReg_cntrl,
-	output MemWrite_cntrl,
-	output PcToReg_cntrl,
-	output RegToPc_cntrl,
-	output ALU_InvA_cntrl,
-	output ALU_InvB_cntrl,
-	output ALU_Cin_cntrl,
-	output SIIC_cntrl,
-	output Halt_cntrl,
-	output [3:0] ALUOp_cntrl,
-	output [1:0] ALUSrc_cntrl,
-	input  [15:0] Instruction,
-	input  [15:0] Writeback_data,
-	input  clk,
-	input  rst
+	output wire [15:0] Read1data,
+	output wire[15:0] Read2data,
+	output wire err,
+	output wire Jump_cntrl,
+	output wire Branch_cntrl,
+	output wire MemRead_cntrl,
+	output wire MemToReg_cntrl,
+	output wire MemWrite_cntrl,
+	output wire PcToReg_cntrl,
+	output wire RegToPc_cntrl,
+	output wire RegWrite_cntrl,
+	output wire ALU_InvA_cntrl,
+	output wire ALU_InvB_cntrl,
+	output wire ALU_Cin_cntrl,
+	output wire SIIC_cntrl,
+	output wire Halt_cntrl,
+	output wire [3:0] ALUOp_cntrl,
+	output wire [1:0] ALUSrc_cntrl,
+	output wire [2:0]  Write_reg_sel_out,
+	input  wire [15:0] Instruction,
+	input  wire [15:0] Writeback_data,
+	input  wire [2:0]  Write_reg_sel_in,
+	input  wire [8:0]  Forwarding_vector,
+	input  wire [47:0] Forwarding_data,
+	input  wire	   RegWrite_cntrl_in,
+	input  wire	   Valid_PC,
+	input  wire clk,
+	input  wire rst
 );
 
-// TODO - in pipelined version, RegWrite_cntrl will have to be outputted from
-// decode as it will be the signal from writeback stage that controls it for
-// decode stage`
-wire control_err, register_err, RegWrite_cntrl;
+wire control_err, register_err;
 assign err = control_err | register_err;
 
 // control module
 wire [1:0] regDst_cntrl;
 control control(
 	// Inputs
+	.Valid_PC(Valid_PC),
 	.Opcode(Instruction[15:11]),
 	.Mode(Instruction[1 : 0]),
 	// Outputs
@@ -57,8 +63,7 @@ control control(
 // although currently this is done in execute phase
 
 // Mux the write register input
-wire [2:0] write_reg_sel;
-assign write_reg_sel = PcToReg_cntrl ? 3'h7 :
+assign Write_reg_sel_out = PcToReg_cntrl ? 3'h7 :
 	regDst_cntrl[1] ? Instruction[10:8] :
         regDst_cntrl[0]	? Instruction[4:2]  : Instruction[7:5];
 
@@ -67,12 +72,28 @@ assign write_reg_sel = PcToReg_cntrl ? 3'h7 :
 wire[15:0] EPC;
 dff EPC_reg [15:0]( .q(EPC), .d(SIIC_cntrl ? Writeback_data : EPC), .rst(rst), .clk(clk));
 
-wire [15:0] r1data;
-assign Read1data = SIIC_cntrl ? EPC : r1data;
+// Only use the value from the registers when the current register being read
+// from is not being written to later down the pipeline. If so, grab
+// the earliest one in (i.e. execute, then memory, then writeback)
+wire [15:0] read1data, read2data;
+
+assign Read1data = 	
+			SIIC_cntrl ? EPC : 
+			Instruction[10:8] == Forwarding_vector[2:0] ?	Forwarding_data[15:0]  :
+			Instruction[10:8] == Forwarding_vector[5:3] ?	Forwarding_data[31:16] :
+			Instruction[10:8] == Forwarding_vector[8:6] ? 	Forwarding_data[47:32] :
+									read1data;
+
+assign Read2data =	
+			Instruction[7:5] == Forwarding_vector[2:0] ?	Forwarding_data[15:0]  :
+			Instruction[7:5] == Forwarding_vector[5:3] ?	Forwarding_data[31:16] :
+			Instruction[7:5] == Forwarding_vector[8:6] ? 	Forwarding_data[47:32] :
+									read2data;
 
 // Register center with bypass to read/write same data concurrently
-rf registers(.read1data(r1data), .read2data(Read2data), .err(register_err),
+rf registers(.read1data(read1data), .read2data(read2data), .err(register_err),
 	.clk(clk), .rst(rst), .read1regsel(Instruction[10:8]), .read2regsel(Instruction[7:5]),
-	.writeregsel(write_reg_sel), .writedata(Writeback_data), .write(RegWrite_cntrl));
+	.writeregsel(Write_reg_sel_in), .writedata(Writeback_data), .write(RegWrite_cntrl_in));
 
 endmodule
+`default_nettype wire

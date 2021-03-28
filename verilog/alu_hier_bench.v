@@ -158,7 +158,8 @@ module alu_hier_bench;
 			cerror = 1'b1;
 	end
 	4'b1100 : begin
-		// Not sure how to test carry OUT. Leaving empty TODO 
+		// Not sure how to test carry OUT. Leaving empty and praying
+		// this works 
 	end
 	4'b1101 : 
 		begin

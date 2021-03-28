@@ -8,16 +8,16 @@ module rf_bypass (
            // Inputs
            clk, rst, read1regsel, read2regsel, writeregsel, writedata, write
            );
-   input clk, rst;
-   input [2:0] read1regsel;
-   input [2:0] read2regsel;
-   input [2:0] writeregsel;
-   input [15:0] writedata;
-   input        write;
+   input wire clk, rst;
+   input wire [2:0] read1regsel;
+   input wire [2:0] read2regsel;
+   input wire [2:0] writeregsel;
+   input wire [15:0] writedata;
+   input wire       write;
 
-   output [15:0] read1data;
-   output [15:0] read2data;
-   output        err;
+   output wire [15:0] read1data;
+   output wire [15:0] read2data;
+   output wire       err;
 
    wire [15:0] read1data_rf, read2data_rf;
    rf registers(.clk(clk), .rst(rst), .read1regsel(read1regsel), .read2regsel(read2regsel),

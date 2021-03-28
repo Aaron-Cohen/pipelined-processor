@@ -1,11 +1,11 @@
 // Aaron Cohen - 2/26/2021
 module reg16(clk, rst, w_en, d, q);
 	localparam bitwidth = 15; // Remember that it is from this number to 0, so 15 really is 16 bits	
-	input clk;
-	input rst;
-	input w_en;
-	input [bitwidth:0] d;
-	output [bitwidth:0] q;
+	input wire clk;
+	input wire rst;
+	input wire w_en;
+	input wire [bitwidth:0] d;
+	output wire [bitwidth:0] q;
 
 	
 	// Recirculating mux style enable

@@ -1,10 +1,11 @@
 module execute(
 	output [15:0] PC_Next,
 	output [15:0] ALU_Out,
+	output	      PCSrc_cntrl,
+	input  [15:0] PC_Inc,
 	input  [15:0] Read1data,
 	input  [15:0] Read2data,
 	input  [15:0] Instruction,
-	input  [15:0] PC_Inc,
 	input  [1:0]  ALUSrc_cntrl,
 	input  [3:0]  ALUOp_cntrl,
 	input	      Branch_cntrl,
@@ -30,12 +31,15 @@ module execute(
 	assign d_sign_ext   = {{5{Instruction[10]}}, Instruction[10:0]};
 	
 	assign addr_offset = branch ? i2_sign_ext : d_sign_ext;
-	cla16 pc_addr_adder(.A(PC_Inc), .B(addr_offset), .Cin(1'b0), .Cout(), .S(pc_offset));
+	cla16 pc_addr_adder(.A(PC_Inc), .B(addr_offset), .Cin(1'b0), .Cout(), .S(PC_Next));
 
-	// mux for to use pc with immediate added or not
-	assign PC_Next = (branch | Jump_cntrl) ? pc_offset : PC_Inc;
+	assign PCSrc_cntrl = (branch | Jump_cntrl);
 
 	// to branch or not to branch, that is the question
+	// 
+	// for branches, ALU does a subtraction. Observing
+	// MSB of output gives us insight for bgtz/bltz,
+	// as does the presence of a high bit for equality
 	assign branch = Branch_cntrl & branch_cond;
 	always @(*)
 		case(Instruction[15:11])

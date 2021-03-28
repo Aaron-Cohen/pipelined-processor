@@ -1,4 +1,5 @@
 module control(
+	input		 Valid_PC,
 	input      [4:0] Opcode,
 	input      [1:0] Mode,
 	output reg [3:0] ALUOp,
@@ -61,6 +62,7 @@ end
 1110	LBI	A<<8 | B
 */
 // Set controls based on opcodes
+// TODO - this next assign statement might not hold once bipelining is added
 assign MemToReg = MemRead; // If we are electing to read memory, we can assume we want to use it.
 always @(*) begin
 	Halt 	 = 1'b0;
@@ -87,7 +89,7 @@ always @(*) begin
 		// IDK what to do here  //
 		/////////////////////////
 		5'b00000 : begin // HALT
-			Halt = 1;
+			Halt = Valid_PC;
 			RegDst = 2'bX;
 			ALUOp = 4'bXXXX;
 			ALUSrc = 2'bXX;
@@ -297,9 +299,6 @@ always @(*) begin
 		// J Format Instructions //
 		//////////////////////////
 
-
-		// TODO - the immediate/displacement need their own ways to
-		// get to ALU as they will not do so by traditional means.
 		5'b00100 : begin // J
 			RegDst = 2'bXX;	// Write register doesn't matter
 			Jump = 1'b1;	
@@ -336,9 +335,6 @@ always @(*) begin
 		// Bonus strange instructions //
 		///////////////////////////////
 		
-		// TODO - no idea how to handle these
-		// TODO - ensure no latch
-
 		5'b00010 : begin // siic
 			ALUOp = 4'bXXXX;
 			ALUSrc = 4'bXXXX;

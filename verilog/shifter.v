@@ -1,9 +1,9 @@
 // Aaron Cohen - 2/13/2021
 module shifter (In, Cnt, Op, Out);
-input [15:0] In;
-input [3:0]  Cnt;
-input [1:0]  Op;
-output [15:0] Out;
+input wire [15:0] In;
+input wire [3:0]  Cnt;
+input wire [1:0]  Op;
+output wire [15:0] Out;
 
 // Left r_shift - lower bits either take on value of 0's or of grabbed upper
 // bits depending on opcode.
