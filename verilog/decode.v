@@ -22,7 +22,7 @@ module decode(
 	input  wire [15:0] Instruction,
 	input  wire [15:0] Writeback_data,
 	input  wire [2:0]  Write_reg_sel_in,
-	input  wire [8:0]  Forwarding_vector,
+	input  wire [11:0]  Forwarding_vector,
 	input  wire [47:0] Forwarding_data,
 	input  wire	   RegWrite_cntrl_in,
 	input  wire	   Valid_PC,
@@ -79,16 +79,16 @@ wire [15:0] read1data, read2data;
 
 assign Read1data = 	
 			SIIC_cntrl ? EPC : 
-			Instruction[10:8] == Forwarding_vector[2:0] ?	Forwarding_data[15:0]  :
-			Instruction[10:8] == Forwarding_vector[5:3] ?	Forwarding_data[31:16] :
-			Instruction[10:8] == Forwarding_vector[8:6] ? 	Forwarding_data[47:32] :
-									read1data;
+			Forwarding_vector[3 ] & (Instruction[10:8] == Forwarding_vector[2:0]) ? Forwarding_data[15:0]  :
+			Forwarding_vector[7 ] & (Instruction[10:8] == Forwarding_vector[6:4]) ? Forwarding_data[31:16] :
+			Forwarding_vector[11] & (Instruction[10:8] == Forwarding_vector[10:8]) ? Forwarding_data[47:32] :
+												read1data;
 
 assign Read2data =	
-			Instruction[7:5] == Forwarding_vector[2:0] ?	Forwarding_data[15:0]  :
-			Instruction[7:5] == Forwarding_vector[5:3] ?	Forwarding_data[31:16] :
-			Instruction[7:5] == Forwarding_vector[8:6] ? 	Forwarding_data[47:32] :
-									read2data;
+			Forwarding_vector[3 ] & (Instruction[7:5] == Forwarding_vector[2:0]) ? Forwarding_data[15:0]  :
+			Forwarding_vector[7 ] & (Instruction[7:5] == Forwarding_vector[6:4]) ? Forwarding_data[31:16] :
+			Forwarding_vector[11] & (Instruction[7:5] == Forwarding_vector[10:8]) ? Forwarding_data[47:32] :
+												read2data;
 
 // Register center with bypass to read/write same data concurrently
 rf registers(.read1data(read1data), .read2data(read2data), .err(register_err),

@@ -48,12 +48,12 @@ dff pipe_fetch[32:0](.clk(clk), .rst(rst), .d({Instruction, PC_Inc, Valid_PC}), 
 /*
  * Examine what registers are being written to for each stage
  * so the decode stage can snag a value if it needs to
- *
- * [2:0] => Execute
- * [5:3] => Memory
- * [8:6] => Writeback
+ * dirty bit to determine if forwarding data is valid
+ * 3  | [2:0] => Execute
+ * 7  | [6:4] => Memory
+ * 11 |[10:8] => Writeback
  */
-wire [8:0]  Forwarding_vector;
+wire [11:0]  Forwarding_vector;
 wire [47:0] Forwarding_data;
 
 wire [15:0] Read1data, Read2data, Writeback_data;
@@ -170,7 +170,7 @@ writeback writeback(
 );	
 
 assign Forwarding_data   = {ALU_Out_p4, ALU_Out_p3, ALU_Out};
-assign Forwarding_vector = {Write_reg_sel_p4, Write_reg_sel_p3, Write_reg_sel_p2};
+assign Forwarding_vector = {RegWrite_cntrl_p4, Write_reg_sel_p4, RegWrite_cntrl_p3, Write_reg_sel_p3, RegWrite_cntrl_p2, Write_reg_sel_p2};
 
    // OR all the err ouputs for every sub-module and assign it as this
    // err output
