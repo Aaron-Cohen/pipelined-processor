@@ -169,7 +169,7 @@ always @(*) begin
 		5'b10000 : begin // ST
 			RegDst = 2'bXX;	// Don't care about RegDst as RegWrite is not asserted
 			ALUOp = 4'b0100;// ALU add
-			// MemToReg = 1'b1;// Set dirty bit for forwarding
+			MemToReg = 1'b1;// Although nothing going to register, this sets dirty bit for forwarding
 			MemWrite = 1'b1;
 			ALUSrc = 2'b01;
 		end
@@ -322,7 +322,6 @@ always @(*) begin
 			Jump = 1'b1;	// Unconditional jump
 			ALUOp = 4'bXXXX;// ALU result unused
 			ALUSrc = 2'bXX;	
-			//MemToReg = 1'b1;// Set dirty bit for forwarding
 			RegWrite = 1'b1;
 			PcToReg = 1'b1;
 		end
