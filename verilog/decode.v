@@ -91,7 +91,7 @@ assign Read2data =
 												read2data;
 
 // Register center with bypass to read/write same data concurrently
-rf registers(.read1data(read1data), .read2data(read2data), .err(register_err),
+rf_bypass registers(.read1data(read1data), .read2data(read2data), .err(register_err),
 	.clk(clk), .rst(rst), .read1regsel(Instruction[10:8]), .read2regsel(Instruction[7:5]),
 	.writeregsel(Write_reg_sel_in), .writedata(Writeback_data), .write(RegWrite_cntrl_in));
 
