@@ -65,7 +65,7 @@ fetch fetch(
 	// Inputs
 	.PC_Next(PC_Next),
 	.ALU_Out(ALU_Out),
-	.RegToPc_cntrl(RegToPc_cntrl),
+	.RegToPc_cntrl(RegToPc_cntrl_p2),
 	.PCSrc_cntrl(PCSrc_cntrl),
 	.Halt_cntrl(Halt_cntrl_p4),
 	.SIIC_cntrl(SIIC_cntrl),
