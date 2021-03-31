@@ -26,6 +26,25 @@ wire Jump_cntrl, Branch_cntrl, MemRead_cntrl, MemToReg_cntrl,
 
 wire Halt_cntrl_p2, Halt_cntrl_p3, Halt_cntrl_p4, Valid_PC_p1;
 wire [15:0] Instruction, PC_Inc, PC_Next, ALU_Out;
+wire [15:0] Instruction_p1, PC_Inc_p1;
+wire [15:0] Read2data_p3, ALU_Out_p3, PC_Inc_p3;
+wire MemRead_cntrl_p3, MemToReg_cntrl_p3, MemWrite_cntrl_p3, RegToPc_cntrl_p3, PcToReg_cntrl_p3;
+wire [11:0]  Forwarding_vector;
+wire [47:0] Forwarding_data;
+
+wire [15:0] Read1data, Read2data, Writeback_data;
+wire [2:0] Write_reg_sel, Write_reg_sel_p2, Write_reg_sel_p3, Write_reg_sel_p4; 
+wire	   RegWrite_cntrl, RegWrite_cntrl_p2, RegWrite_cntrl_p3, RegWrite_cntrl_p4;
+wire [3:0] ALUOp_cntrl_p2;
+wire [1:0] ALUSrc_cntrl_p2;
+wire [15:0] Read1data_p2, Read2data_p2, Writeback_data_p2, Instruction_p2, PC_Inc_p2;
+wire Jump_cntrl_p2, Branch_cntrl_p2, MemRead_cntrl_p2, MemToReg_cntrl_p2,
+	MemWrite_cntrl_p2, PcToReg_cntrl_p2, RegToPc_cntrl_p2,
+	ALU_InvA_cntrl_p2, ALU_InvB_cntrl_p2, ALU_Cin_cntrl_p2,
+	SIIC_cntrl_p2;
+wire [15:0] Memory_read_data;
+wire [15:0] Memory_read_data_p4, PC_Inc_p4, ALU_Out_p4;
+wire MemToReg_cntrl_p4, PcToReg_cntrl_p4;
 fetch fetch(
 	// Outputs
 	.Instruction(Instruction),
@@ -42,7 +61,6 @@ fetch fetch(
 	.rst(rst)
 );
 
-wire [15:0] Instruction_p1, PC_Inc_p1;
 dff pipe_fetch[32:0](.clk(clk), .rst(rst | PCSrc_cntrl), .d({Instruction, PC_Inc, Valid_PC}), .q({Instruction_p1, PC_Inc_p1, Valid_PC_p1}));
 
 /*
@@ -53,12 +71,6 @@ dff pipe_fetch[32:0](.clk(clk), .rst(rst | PCSrc_cntrl), .d({Instruction, PC_Inc
  * 7  | [6:4] => Memory
  * 11 |[10:8] => Writeback
  */
-wire [11:0]  Forwarding_vector;
-wire [47:0] Forwarding_data;
-
-wire [15:0] Read1data, Read2data, Writeback_data;
-wire [2:0] Write_reg_sel, Write_reg_sel_p2, Write_reg_sel_p3, Write_reg_sel_p4; 
-wire	   RegWrite_cntrl, RegWrite_cntrl_p2, RegWrite_cntrl_p3, RegWrite_cntrl_p4;
 decode decode(
 	// Decode Outputs
 	.Read1data(Read1data),
@@ -93,13 +105,6 @@ decode decode(
 	.rst(rst)
 );
 
-wire [3:0] ALUOp_cntrl_p2;
-wire [1:0] ALUSrc_cntrl_p2;
-wire [15:0] Read1data_p2, Read2data_p2, Writeback_data_p2, Instruction_p2, PC_Inc_p2;
-wire Jump_cntrl_p2, Branch_cntrl_p2, MemRead_cntrl_p2, MemToReg_cntrl_p2,
-	MemWrite_cntrl_p2, PcToReg_cntrl_p2, RegToPc_cntrl_p2,
-	ALU_InvA_cntrl_p2, ALU_InvB_cntrl_p2, ALU_Cin_cntrl_p2,
-	SIIC_cntrl_p2;
 
 dff pipe_decode_p2[85:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 	.d({Read1data, Read2data, Jump_cntrl, Branch_cntrl, MemRead_cntrl, MemWrite_cntrl, PcToReg_cntrl,
@@ -129,13 +134,10 @@ execute execute(
 );
 
 
-wire [15:0] Read2data_p3, ALU_Out_p3, PC_Inc_p3;
-wire MemRead_cntrl_p3, MemToReg_cntrl_p3, MemWrite_cntrl_p3, RegToPc_cntrl_p3, PcToReg_cntrl_p3;
 dff pipe_execute_p3[56:0](.clk(clk), .rst(rst),
 	.d({ALU_Out,    MemWrite_cntrl_p2, MemRead_cntrl_p2, Read2data_p2, MemToReg_cntrl_p2, PcToReg_cntrl_p2, PC_Inc_p2, Write_reg_sel_p2, RegWrite_cntrl_p2, Halt_cntrl_p2}),
 	.q({ALU_Out_p3, MemWrite_cntrl_p3, MemRead_cntrl_p3, Read2data_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, PC_Inc_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3}));
 
-wire [15:0] Memory_read_data;
 memory memory(
 	// Outputs
 	.Memory_read_data(Memory_read_data),
@@ -149,8 +151,6 @@ memory memory(
 	.rst(rst)
 );
 
-wire [15:0] Memory_read_data_p4, PC_Inc_p4, ALU_Out_p4;
-wire MemToReg_cntrl_p4, PcToReg_cntrl_p4;
 dff pipe_memory_p4[54:0](.clk(clk), .rst(rst), 
 	.d({Memory_read_data,    PC_Inc_p3, ALU_Out_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3}),
 	.q({Memory_read_data_p4, PC_Inc_p4, ALU_Out_p4, MemToReg_cntrl_p4, PcToReg_cntrl_p4, Write_reg_sel_p4, RegWrite_cntrl_p4, Halt_cntrl_p4})

@@ -18,7 +18,7 @@ module control(
 	output reg Halt,
 	output reg SIIC,
 	output reg err,
-	output     MemToReg
+	output reg MemToReg
 );
 
 reg [3:0] shared_opcode1;
@@ -63,7 +63,7 @@ end
 */
 // Set controls based on opcodes
 // TODO - this next assign statement might not hold once bipelining is added
-assign MemToReg = MemRead; // If we are electing to read memory, we can assume we want to use it.
+//assign MemToReg = MemRead; // If we are electing to read memory, we can assume we want to use it.
 always @(*) begin
 	Halt 	 = 1'b0;
 	err 	 = 1'b0;
@@ -81,6 +81,7 @@ always @(*) begin
 	Jump     = 1'b0;	// J*
 	Branch   = 1'b0;	// B*Z
 	MemRead  = 1'b0;	// Loads and load like instructions
+	MemToReg = 1'b0;
 	MemWrite = 1'b0;	// Store and its variants
 	RegWrite = 1'b0;	// R --> R operations
 	case(Opcode)
@@ -168,12 +169,14 @@ always @(*) begin
 		5'b10000 : begin // ST
 			RegDst = 2'bXX;	// Don't care about RegDst as RegWrite is not asserted
 			ALUOp = 4'b0100;// ALU add
+			// MemToReg = 1'b1;// Set dirty bit for forwarding
 			MemWrite = 1'b1;
 			ALUSrc = 2'b01;
 		end
 		5'b10001 : begin // LD
 			RegDst = 2'b00;
 			MemRead = 1'b1;	
+			MemToReg = 1'b1;
 			ALUOp = 4'b0100;// ALU add
 			ALUSrc = 2'b01;	
 			RegWrite = 1'b1;
@@ -307,7 +310,8 @@ always @(*) begin
 		end	
 		5'b00101 : begin // JR
 			RegDst = 2'bXX;
-			Jump = 1'bX;	// This can be a dont care because RegToPC take priority
+			Jump = 1'b1;	// This could be a dont care because RegToPC take priority,
+					// but is 1 so PcSrc assert clears pipeline of instructions after
 			ALUOp = 4'b0100;// ALU add
 			ALUSrc = 2'b10;	// Use immediate as other operand in ALU
 			RegWrite = 1'b0;// No reg being written to
@@ -318,12 +322,13 @@ always @(*) begin
 			Jump = 1'b1;	// Unconditional jump
 			ALUOp = 4'bXXXX;// ALU result unused
 			ALUSrc = 2'bXX;	
+			//MemToReg = 1'b1;// Set dirty bit for forwarding
 			RegWrite = 1'b1;
 			PcToReg = 1'b1;
 		end
 		5'b00111 : begin // JALR 
 			RegDst = 2'bXX;
-			Jump = 1'bX;
+			Jump = 1'b1;
 			ALUOp = 4'b0100; // ALU Add
 			ALUSrc = 2'b10;  
 			RegWrite = 1'b1;
