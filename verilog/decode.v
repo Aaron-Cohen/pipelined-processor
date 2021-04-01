@@ -83,7 +83,7 @@ wire load_warning, load_warning_ff;
 assign load_warning = Instruction[15:11] == 5'b10001;
 dff load_warn_ff(.clk(clk), .rst(rst), .d(load_warning), .q(load_warning_ff));
 assign Load_warning_a = load_warning_ff & (Instruction[10:8] == Forwarding_vector[2:0]);
-assign Load_warning_b = load_warning_ff & (Instruction[7:5]  == Forwarding_vector[2:0]) & (ALUSrc_cntrl == 1'b0); 
+assign Load_warning_b = load_warning_ff & (Instruction[7:5]  == Forwarding_vector[2:0]) & (ALUSrc_cntrl == 2'b00 | MemWrite_cntrl); 
 
 // Mux the write register input
 assign Write_reg_sel_out = PcToReg_cntrl ? 3'h7 :

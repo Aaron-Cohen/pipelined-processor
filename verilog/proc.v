@@ -52,7 +52,8 @@ wire [2:0]			Write_reg_sel,		Write_reg_sel_p2,	Write_reg_sel_p3,	Write_reg_sel_p
 wire [3:0]			ALUOp_cntrl, 		ALUOp_cntrl_p2;
 wire [15:0]						PC_Next;
 wire [15:0]			Read1data,		Read1data_p2;
-wire [15:0]			Read2data, 		Read2data_p2,		Read2data_p3;
+wire [15:0]			Read2data, 		Read2data_p2;
+wire [15:0]						MemWriteData,		MemWriteData_p3;
 wire [15:0]												Writeback_data;
 wire [15:0] 	Instruction,	Instruction_p1, 	Instruction_p2;
 wire [15:0]									Memory_read_data,	Memory_read_data_p4;
@@ -171,12 +172,12 @@ dff pipe_decode_p2[88:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 		Load_warning_b_p2
 	})
 );
-
 execute execute(
 	// Outputs
 	.PC_Next(PC_Next),
 	.ALU_Out(ALU_Out),
 	.PCSrc_cntrl(PCSrc_cntrl),
+	.MemWriteData(MemWriteData),
 	// Inputs
 	.PC_Inc(PC_Inc_p2),
 	.Read1data(Read1data_p2),
@@ -198,8 +199,8 @@ execute execute(
 dff pipe_execute_p3[58:0](.clk(clk), .rst(rst),
 	.d({
 		ALU_Out,   
-		MemWrite_cntrl_p2, MemRead_cntrl_p2, Read2data_p2, MemToReg_cntrl_p2, PcToReg_cntrl_p2, RegToPc_cntrl_p2, PC_Inc_p2, Write_reg_sel_p2, RegWrite_cntrl_p2, Halt_cntrl_p2, ValidFwd_cntrl_p2}),
-	.q({ALU_Out_p3, MemWrite_cntrl_p3, MemRead_cntrl_p3, Read2data_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, RegToPc_cntrl_p3, PC_Inc_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3, ValidFwd_cntrl_p3}));
+		MemWrite_cntrl_p2, MemRead_cntrl_p2, MemWriteData, MemToReg_cntrl_p2, PcToReg_cntrl_p2, RegToPc_cntrl_p2, PC_Inc_p2, Write_reg_sel_p2, RegWrite_cntrl_p2, Halt_cntrl_p2, ValidFwd_cntrl_p2}),
+	.q({ALU_Out_p3, MemWrite_cntrl_p3, MemRead_cntrl_p3, MemWriteData_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, RegToPc_cntrl_p3, PC_Inc_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3, ValidFwd_cntrl_p3}));
 
 memory memory(
 	// Outputs
@@ -209,7 +210,7 @@ memory memory(
 	.MemWrite_cntrl(MemWrite_cntrl_p3),
 	.MemRead_cntrl(MemRead_cntrl_p3),
 	.Halt_cntrl(Halt_cntrl_p4),
-	.Read2data(Read2data_p3),
+	.MemWriteData(MemWriteData_p3),
 	.clk(clk),
 	.rst(rst)
 );

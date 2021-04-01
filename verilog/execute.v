@@ -1,6 +1,7 @@
 module execute(
 	output [15:0] PC_Next,
 	output [15:0] ALU_Out,
+	output [15:0] MemWriteData,
 	output	      PCSrc_cntrl,
 	input  [15:0] PC_Inc,
 	input  [15:0] Read1data,
@@ -64,16 +65,18 @@ module execute(
 		endcase
 
 	wire [15:0] alu_input_mux;
+	wire [15:0] Read2data_clean;
+	assign Read2data_clean = Load_warning_b ? Memory_read_data : Read2data;
 	// Zero extended is used for XORI and ANDNI
-	assign alu_input_mux =  (ALUSrc_cntrl == 2'b00) ? Read2data :
+	assign alu_input_mux =  (ALUSrc_cntrl == 2'b00) ? Read2data_clean :
 	       			(ALUSrc_cntrl == 2'b01) ? (Instruction[15:12] == 4'b0101 ? imm_zero_ext : imm_sign_ext) :
 							  i2_sign_ext ;
 
-	wire [15:0] alu_input_data_a, alu_input_data_b;
+	wire [15:0] alu_input_data_a;
 	assign alu_input_data_a = Load_warning_a ? Memory_read_data : Read1data;
-	assign alu_input_data_b = Load_warning_b ? Memory_read_data : alu_input_mux;
-	//assign alu_input_data_b = alu_input_mux;
-	alu alu(.Out(ALU_Out), .A(alu_input_data_a), .B(alu_input_data_b), .Cin(ALU_Cin),
+	assign MemWriteData = Load_warning_b ? Memory_read_data : Read2data;
+	//assign MemWriteData = Read2data;
+	alu alu(.Out(ALU_Out), .A(alu_input_data_a), .B(alu_input_mux), .Cin(ALU_Cin),
 		.Op(ALUOp_cntrl), .invA(ALU_InvA), .invB(ALU_InvB));
 	
 endmodule
