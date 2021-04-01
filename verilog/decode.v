@@ -25,9 +25,10 @@ module decode(
 	input  wire [15:0] Instruction,
 	input  wire [15:0] Writeback_data,
 	input  wire [2:0]  Write_reg_sel_in,
-	input  wire [11:0]  Forwarding_vector,
+	input  wire [11:0] Forwarding_vector,
 	input  wire [47:0] Forwarding_data,
 	input  wire	   RegWrite_cntrl_in,
+	input  wire	   SIIC_cntrl_in,
 	input  wire	   Valid_PC,
 	input  wire clk,
 	input  wire rst
@@ -63,6 +64,7 @@ control control(
 	.ValidFwd(ValidFwd_cntrl),
 	.err(control_err)
 );
+
 // TODO - maybe add detection for branches here, like page 351 of textbook
 // although currently this is done in execute phase
 
@@ -94,7 +96,7 @@ assign Write_reg_sel_out = PcToReg_cntrl ? 3'h7 :
 // EPC feeds back its output when exception is not asserted, only updated when
 // exception. Writeback data will be the PC+2 from PcToReg being asserted.
 wire[15:0] EPC;
-dff EPC_reg [15:0]( .q(EPC), .d(SIIC_cntrl ? Writeback_data : EPC), .rst(rst), .clk(clk));
+dff EPC_reg [15:0]( .q(EPC), .d(SIIC_cntrl_in ? Writeback_data : EPC), .rst(rst), .clk(clk));
 
 // Only use the value from the registers when the current register being read
 // from is not being written to later down the pipeline. If so, grab

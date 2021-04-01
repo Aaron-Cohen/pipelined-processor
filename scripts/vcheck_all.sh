@@ -11,6 +11,6 @@ cd ..
 rm -rf vcheck
 mkdir vcheck
 cd vcheck
-cp verilog/*.vcheck.out .
+cp ../verilog/*.vcheck.out .
 grep -s --color=always --exclude=Makefile -l "Line" ./*.vcheck.out
 cd ../scripts

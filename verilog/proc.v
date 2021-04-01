@@ -34,7 +34,7 @@ wire				Load_warning_a,		Load_warning_a_p2;
 wire				Load_warning_b,		Load_warning_b_p2;
 wire 		Valid_PC,	Valid_PC_p1;
 wire				Halt_cntrl,		Halt_cntrl_p2,		Halt_cntrl_p3,		Halt_cntrl_p4;
-wire				SIIC_cntrl,		SIIC_cntrl_p2;
+wire				SIIC_cntrl,		SIIC_cntrl_p2,		SIIC_cntrl_p3,		SIIC_cntrl_p4, SIIC_cntrl_p5;
 wire				Jump_cntrl,		Jump_cntrl_p2;
 wire				Branch_cntrl,		Branch_cntrl_p2;
 wire				ALU_Cin_cntrl,		ALU_Cin_cntrl_p2;
@@ -72,12 +72,12 @@ fetch fetch(
 	.RegToPc_cntrl(RegToPc_cntrl_p2),
 	.PCSrc_cntrl(PCSrc_cntrl),
 	.Halt_cntrl(Halt_cntrl_p4),
-	.SIIC_cntrl(SIIC_cntrl),
+	.SIIC_cntrl(SIIC_cntrl_p2),
 	.clk(clk),
 	.rst(rst)
 );
 
-dff pipe_fetch[32:0](.clk(clk), .rst(rst | PCSrc_cntrl),
+dff pipe_fetch[32:0](.clk(clk), .rst(rst | PCSrc_cntrl | SIIC_cntrl),
 	.d({Instruction,	PC_Inc,		Valid_PC}),
 	.q({Instruction_p1,	PC_Inc_p1,	Valid_PC_p1})
 );
@@ -115,12 +115,13 @@ decode decode(
 	.Writeback_data(Writeback_data),
 	.Write_reg_sel_in(Write_reg_sel_p4),
 	.RegWrite_cntrl_in(RegWrite_cntrl_p4),
+	.SIIC_cntrl_in(SIIC_cntrl_p4),
 	.clk(clk),
 	.rst(rst)
 );
 
 
-dff pipe_decode_p2[88:0](.clk(clk), .rst(rst | PCSrc_cntrl),
+dff pipe_decode_p2[88:0](.clk(clk), .rst(rst | PCSrc_cntrl | SIIC_cntrl_p2),
 	.d({	
 		Read1data,
 		Read2data,
@@ -196,7 +197,7 @@ execute execute(
 );
 
 
-dff pipe_execute_p3[58:0](.clk(clk), .rst(rst),
+dff pipe_execute_p3[59:0](.clk(clk), .rst(rst),
 	.d({
 		ALU_Out,   
 		MemWrite_cntrl_p2,
@@ -209,7 +210,8 @@ dff pipe_execute_p3[58:0](.clk(clk), .rst(rst),
 		Write_reg_sel_p2,
 		RegWrite_cntrl_p2,
 		Halt_cntrl_p2,
-		ValidFwd_cntrl_p2
+		ValidFwd_cntrl_p2,
+		SIIC_cntrl_p2
 	}),
 	.q({
 		ALU_Out_p3,
@@ -223,7 +225,8 @@ dff pipe_execute_p3[58:0](.clk(clk), .rst(rst),
 		Write_reg_sel_p3,
 		RegWrite_cntrl_p3,
 		Halt_cntrl_p3,
-		ValidFwd_cntrl_p3
+		ValidFwd_cntrl_p3,
+		SIIC_cntrl_p3
 	})
 );
 
@@ -240,9 +243,9 @@ memory memory(
 	.rst(rst)
 );
 
-dff pipe_memory_p4[56:0](.clk(clk), .rst(rst), 
-	.d({Memory_read_data,    PC_Inc_p3, ALU_Out_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, RegToPc_cntrl_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3, ValidFwd_cntrl_p3}),
-	.q({Memory_read_data_p4, PC_Inc_p4, ALU_Out_p4, MemToReg_cntrl_p4, PcToReg_cntrl_p4, RegToPc_cntrl_p4, Write_reg_sel_p4, RegWrite_cntrl_p4, Halt_cntrl_p4, ValidFwd_cntrl_p4})
+dff pipe_memory_p4[57:0](.clk(clk), .rst(rst), 
+	.d({Memory_read_data,    PC_Inc_p3, ALU_Out_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, RegToPc_cntrl_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3, ValidFwd_cntrl_p3, SIIC_cntrl_p3}),
+	.q({Memory_read_data_p4, PC_Inc_p4, ALU_Out_p4, MemToReg_cntrl_p4, PcToReg_cntrl_p4, RegToPc_cntrl_p4, Write_reg_sel_p4, RegWrite_cntrl_p4, Halt_cntrl_p4, ValidFwd_cntrl_p4, SIIC_cntrl_p4})
 );
 
 writeback writeback(

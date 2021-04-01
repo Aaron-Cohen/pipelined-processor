@@ -349,9 +349,12 @@ always @(*) begin
 		///////////////////////////////
 		
 		5'b00010 : begin // siic
-			ALUOp = 4'bXXXX;
-			ALUSrc = 4'bXXXX;
 			RegDst = 2'bXX;
+			Jump = 1'b1;
+			ALUSrc = 2'b10;  
+			PcToReg = 1'b1;
+			ValidFwd = 1'b0;
+			ALUOp = 4'bXXXX;
 			SIIC = 1'b1;
 			PcToReg = 1'b1;
 		end	
@@ -359,7 +362,6 @@ always @(*) begin
 			ALUOp = 4'b1111; // ALU A
 			ALUSrc = 4'bXXXX;
 			RegDst = 2'bXX;
-			SIIC = 1'b1;
 			RegToPc = 1'b1;
 		end
 		default : begin
