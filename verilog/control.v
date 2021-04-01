@@ -312,6 +312,7 @@ always @(*) begin
 			Jump = 1'b1;	
 			ALUOp = 4'bXXXX;
 			ALUSrc = 2'bXX;	// ALU result not used
+			ValidFwd = 1'b0;
 		end	
 		5'b00101 : begin // JR
 			RegDst = 2'bXX;
@@ -321,6 +322,7 @@ always @(*) begin
 			ALUSrc = 2'b10;	// Use immediate as other operand in ALU
 			RegWrite = 1'b0;// No reg being written to
 			RegToPc = 1'b1;
+			ValidFwd = 1'b0;
 		end
 		5'b00110 : begin // JAL
 			RegDst = 2'bXX;	// Write register doesn't matter
@@ -329,6 +331,7 @@ always @(*) begin
 			ALUSrc = 2'bXX;	
 			RegWrite = 1'b1;
 			PcToReg = 1'b1;
+			ValidFwd = 1'b0;
 		end
 		5'b00111 : begin // JALR 
 			RegDst = 2'bXX;
@@ -338,6 +341,7 @@ always @(*) begin
 			RegWrite = 1'b1;
 			PcToReg = 1'b1;
 			RegToPc = 1'b1;
+			ValidFwd = 1'b0;
 		end
 
 		/////////////////////////////////
@@ -359,7 +363,7 @@ always @(*) begin
 			RegToPc = 1'b1;
 		end
 		default : begin
-			err = 1;
+			err = 1'b1;
 			ALUOp = 4'bXXXX;
 			ALUSrc = 4'bXXXX;
 			RegDst = 2'bXX;

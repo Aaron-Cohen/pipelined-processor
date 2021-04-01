@@ -76,6 +76,7 @@ control control(
 * is there, to overwrite whatever Read1data value is with the memory value
 *
 * Only consider input b in the case where its R format, without immediate 
+* or if it is a ST/STU operation where Rd is a source that must be updated
 * 
 * This has a special forwarding path from memory 
 */
