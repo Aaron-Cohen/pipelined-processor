@@ -3,6 +3,7 @@ module decode(
 	output wire [15:0] Read1data,
 	output wire[15:0] Read2data,
 	output wire err,
+	output wire Load_warning,
 	output wire Jump_cntrl,
 	output wire Branch_cntrl,
 	output wire MemRead_cntrl,
@@ -64,6 +65,22 @@ control control(
 // TODO - maybe add detection for branches here, like page 351 of textbook
 // although currently this is done in execute phase
 
+/*
+* Forwarding has an issue with a load that is immediately
+* followed by a read on that register. When that read occurs,
+* the load is still in execute so no forwarding can occur from 
+* memory.
+*
+* load_warning tells execute in next clk cycle, when this instruction
+* is there, to overwrite whatever Read1data value is with the memory value
+* 
+* This has with a special forwarding path from memory 
+*/
+wire load_warning, load_warning_ff;
+assign load_warning = Instruction[15:11] == 5'b10001;
+dff load_warn_ff(.clk(clk), .rst(rst), .d(load_warning), .q(load_warning_ff));
+assign Load_warning = load_warning_ff & (Instruction[10:8] == Forwarding_vector[2:0]);
+
 // Mux the write register input
 assign Write_reg_sel_out = PcToReg_cntrl ? 3'h7 :
 	regDst_cntrl[1] ? Instruction[10:8] :
@@ -91,7 +108,6 @@ assign Read2data =
 			Forwarding_vector[7 ] & (Instruction[7:5] == Forwarding_vector[6:4]) ? Forwarding_data[31:16] :
 			Forwarding_vector[11] & (Instruction[7:5] == Forwarding_vector[10:8]) ? Forwarding_data[47:32] :
 												read2data;
-
 // Register center with bypass to read/write same data concurrently
 rf_bypass registers(.read1data(read1data), .read2data(read2data), .err(register_err),
 	.clk(clk), .rst(rst), .read1regsel(Instruction[10:8]), .read2regsel(Instruction[7:5]),

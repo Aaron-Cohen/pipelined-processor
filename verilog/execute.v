@@ -5,6 +5,7 @@ module execute(
 	input  [15:0] PC_Inc,
 	input  [15:0] Read1data,
 	input  [15:0] Read2data,
+	input  [15:0] Memory_read_data,
 	input  [15:0] Instruction,
 	input  [1:0]  ALUSrc_cntrl,
 	input  [3:0]  ALUOp_cntrl,
@@ -12,7 +13,8 @@ module execute(
 	input	      Jump_cntrl,
 	input	      ALU_InvB,
 	input	      ALU_InvA,
-	input	      ALU_Cin
+	input	      ALU_Cin,
+	input	      Load_warning
 );
 
 	wire branch; reg branch_cond;
@@ -66,7 +68,9 @@ module execute(
 	       			(ALUSrc_cntrl == 2'b01) ? (Instruction[15:12] == 4'b0101 ? imm_zero_ext : imm_sign_ext) :
 							  i2_sign_ext ;
 
-	alu alu(.Out(ALU_Out), .A(Read1data), .B(alu_input_mux), .Cin(ALU_Cin),
+	wire [15:0] alu_input_data;
+	assign alu_input_data = Load_warning ? Memory_read_data : Read1data;
+	alu alu(.Out(ALU_Out), .A(alu_input_data), .B(alu_input_mux), .Cin(ALU_Cin),
 		.Op(ALUOp_cntrl), .invA(ALU_InvA), .invB(ALU_InvB));
 	
 endmodule

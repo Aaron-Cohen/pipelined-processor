@@ -30,6 +30,7 @@ wire [47:0] Forwarding_data;
 
  		Fetch		Decode			Execute			Memory			Writeback	*/
 wire							PCSrc_cntrl;
+wire				Load_warning,		Load_warning_p2;
 wire 		Valid_PC,	Valid_PC_p1;
 wire				Halt_cntrl,		Halt_cntrl_p2,		Halt_cntrl_p3,		Halt_cntrl_p4;
 wire				SIIC_cntrl,		SIIC_cntrl_p2;
@@ -84,6 +85,7 @@ decode decode(
 	.Read1data(Read1data),
 	.Read2data(Read2data),
 	.err(err),
+	.Load_warning(Load_warning),
 	// Control Outputs
 	.Jump_cntrl(Jump_cntrl),
 	.Branch_cntrl(Branch_cntrl),
@@ -115,7 +117,7 @@ decode decode(
 );
 
 
-dff pipe_decode_p2[86:0](.clk(clk), .rst(rst | PCSrc_cntrl),
+dff pipe_decode_p2[87:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 	.d({	
 		Read1data,
 		Read2data,
@@ -137,7 +139,8 @@ dff pipe_decode_p2[86:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 		Write_reg_sel,
 		MemToReg_cntrl,
 		Halt_cntrl,
-		ValidFwd_cntrl
+		ValidFwd_cntrl,
+		Load_warning
 	}),
 	.q({
 		Read1data_p2,
@@ -160,7 +163,8 @@ dff pipe_decode_p2[86:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 		Write_reg_sel_p2,
 		MemToReg_cntrl_p2,
 		Halt_cntrl_p2,
-		ValidFwd_cntrl_p2
+		ValidFwd_cntrl_p2,
+		Load_warning_p2
 	})
 );
 
@@ -173,6 +177,8 @@ execute execute(
 	.PC_Inc(PC_Inc_p2),
 	.Read1data(Read1data_p2),
 	.Read2data(Read2data_p2),
+	.Load_warning(Load_warning_p2),
+	.Memory_read_data(Memory_read_data),
 	.Instruction(Instruction_p2),
 	.ALUSrc_cntrl(ALUSrc_cntrl_p2),
 	.Branch_cntrl(Branch_cntrl_p2),
@@ -228,7 +234,8 @@ writeback writeback(
  * 7  => [6:4] 	=> Memory
  * 11 => [10:8]	=> Writeback
  */
-assign Forwarding_data   = {Writeback_data, ALU_Out_p3, ALU_Out};
+
+assign Forwarding_data   = {Writeback_data, MemToReg_cntrl_p3 ? Memory_read_data : ALU_Out_p3, ALU_Out};
 assign Forwarding_vector = {
 	ValidFwd_cntrl_p4, Write_reg_sel_p4,
 	ValidFwd_cntrl_p3, Write_reg_sel_p3,
