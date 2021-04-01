@@ -3,7 +3,8 @@ module decode(
 	output wire [15:0] Read1data,
 	output wire[15:0] Read2data,
 	output wire err,
-	output wire Load_warning,
+	output wire Load_warning_a,
+	output wire Load_warning_b,
 	output wire Jump_cntrl,
 	output wire Branch_cntrl,
 	output wire MemRead_cntrl,
@@ -73,13 +74,16 @@ control control(
 *
 * load_warning tells execute in next clk cycle, when this instruction
 * is there, to overwrite whatever Read1data value is with the memory value
+*
+* Only consider input b in the case where its R format, without immediate 
 * 
-* This has with a special forwarding path from memory 
+* This has a special forwarding path from memory 
 */
 wire load_warning, load_warning_ff;
 assign load_warning = Instruction[15:11] == 5'b10001;
 dff load_warn_ff(.clk(clk), .rst(rst), .d(load_warning), .q(load_warning_ff));
-assign Load_warning = load_warning_ff & (Instruction[10:8] == Forwarding_vector[2:0]);
+assign Load_warning_a = load_warning_ff & (Instruction[10:8] == Forwarding_vector[2:0]);
+assign Load_warning_b = load_warning_ff & (Instruction[7:5]  == Forwarding_vector[2:0]) & (ALUSrc_cntrl == 1'b0); 
 
 // Mux the write register input
 assign Write_reg_sel_out = PcToReg_cntrl ? 3'h7 :

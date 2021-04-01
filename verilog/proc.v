@@ -30,7 +30,8 @@ wire [47:0] Forwarding_data;
 
  		Fetch		Decode			Execute			Memory			Writeback	*/
 wire							PCSrc_cntrl;
-wire				Load_warning,		Load_warning_p2;
+wire				Load_warning_a,		Load_warning_a_p2;
+wire				Load_warning_b,		Load_warning_b_p2;
 wire 		Valid_PC,	Valid_PC_p1;
 wire				Halt_cntrl,		Halt_cntrl_p2,		Halt_cntrl_p3,		Halt_cntrl_p4;
 wire				SIIC_cntrl,		SIIC_cntrl_p2;
@@ -85,7 +86,8 @@ decode decode(
 	.Read1data(Read1data),
 	.Read2data(Read2data),
 	.err(err),
-	.Load_warning(Load_warning),
+	.Load_warning_a(Load_warning_a),
+	.Load_warning_b(Load_warning_b),
 	// Control Outputs
 	.Jump_cntrl(Jump_cntrl),
 	.Branch_cntrl(Branch_cntrl),
@@ -117,7 +119,7 @@ decode decode(
 );
 
 
-dff pipe_decode_p2[87:0](.clk(clk), .rst(rst | PCSrc_cntrl),
+dff pipe_decode_p2[88:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 	.d({	
 		Read1data,
 		Read2data,
@@ -140,7 +142,8 @@ dff pipe_decode_p2[87:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 		MemToReg_cntrl,
 		Halt_cntrl,
 		ValidFwd_cntrl,
-		Load_warning
+		Load_warning_a,
+		Load_warning_b
 	}),
 	.q({
 		Read1data_p2,
@@ -164,7 +167,8 @@ dff pipe_decode_p2[87:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 		MemToReg_cntrl_p2,
 		Halt_cntrl_p2,
 		ValidFwd_cntrl_p2,
-		Load_warning_p2
+		Load_warning_a_p2,
+		Load_warning_b_p2
 	})
 );
 
@@ -177,7 +181,8 @@ execute execute(
 	.PC_Inc(PC_Inc_p2),
 	.Read1data(Read1data_p2),
 	.Read2data(Read2data_p2),
-	.Load_warning(Load_warning_p2),
+	.Load_warning_a(Load_warning_a_p2),
+	.Load_warning_b(Load_warning_b_p2),
 	.Memory_read_data(Memory_read_data),
 	.Instruction(Instruction_p2),
 	.ALUSrc_cntrl(ALUSrc_cntrl_p2),

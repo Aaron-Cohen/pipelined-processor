@@ -181,7 +181,7 @@ always @(*) begin
 			RegDst = 2'b00;
 			MemRead = 1'b1;	
 			MemToReg = 1'b1;
-			ValidFwd = 1'b0;
+			ValidFwd = 1'b1;
 			ALUOp = 4'b0100;// ALU add
 			ALUSrc = 2'b01;	
 			RegWrite = 1'b1;

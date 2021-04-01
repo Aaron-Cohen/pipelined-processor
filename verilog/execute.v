@@ -14,7 +14,8 @@ module execute(
 	input	      ALU_InvB,
 	input	      ALU_InvA,
 	input	      ALU_Cin,
-	input	      Load_warning
+	input	      Load_warning_a,
+	input	      Load_warning_b
 );
 
 	wire branch; reg branch_cond;
@@ -68,9 +69,11 @@ module execute(
 	       			(ALUSrc_cntrl == 2'b01) ? (Instruction[15:12] == 4'b0101 ? imm_zero_ext : imm_sign_ext) :
 							  i2_sign_ext ;
 
-	wire [15:0] alu_input_data;
-	assign alu_input_data = Load_warning ? Memory_read_data : Read1data;
-	alu alu(.Out(ALU_Out), .A(alu_input_data), .B(alu_input_mux), .Cin(ALU_Cin),
+	wire [15:0] alu_input_data_a, alu_input_data_b;
+	assign alu_input_data_a = Load_warning_a ? Memory_read_data : Read1data;
+	assign alu_input_data_b = Load_warning_b ? Memory_read_data : alu_input_mux;
+	//assign alu_input_data_b = alu_input_mux;
+	alu alu(.Out(ALU_Out), .A(alu_input_data_a), .B(alu_input_data_b), .Cin(ALU_Cin),
 		.Op(ALUOp_cntrl), .invA(ALU_InvA), .invB(ALU_InvB));
 	
 endmodule
