@@ -16,6 +16,7 @@ module decode(
 	output wire ALU_Cin_cntrl,
 	output wire SIIC_cntrl,
 	output wire Halt_cntrl,
+	output wire ValidFwd_cntrl,
 	output wire [3:0] ALUOp_cntrl,
 	output wire [1:0] ALUSrc_cntrl,
 	output wire [2:0]  Write_reg_sel_out,
@@ -57,6 +58,7 @@ control control(
 	.ALU_Cin(ALU_Cin_cntrl),
 	.SIIC(SIIC_cntrl),
 	.Halt(Halt_cntrl),
+	.ValidFwd(ValidFwd_cntrl),
 	.err(control_err)
 );
 // TODO - maybe add detection for branches here, like page 351 of textbook

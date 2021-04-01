@@ -18,7 +18,8 @@ module control(
 	output reg Halt,
 	output reg SIIC,
 	output reg err,
-	output reg MemToReg
+	output reg MemToReg,
+	output reg ValidFwd
 );
 
 reg [3:0] shared_opcode1;
@@ -84,6 +85,7 @@ always @(*) begin
 	MemToReg = 1'b0;
 	MemWrite = 1'b0;	// Store and its variants
 	RegWrite = 1'b0;	// R --> R operations
+	ValidFwd = 1'b1;	// Most values can be forwarded
 	case(Opcode)
 		////////////////////////////
 		// Strange Instructions  //
@@ -94,6 +96,7 @@ always @(*) begin
 			RegDst = 2'bX;
 			ALUOp = 4'bXXXX;
 			ALUSrc = 2'bXX;
+			ValidFwd = 1'b0;
 		end
 		5'b00001 : begin // NOP
 			// Doesn't do anything, and we don't care about these
@@ -102,6 +105,7 @@ always @(*) begin
 			RegDst = 2'bXX;
 			ALUOp = 4'bXXXX;
 			ALUSrc = 2'bXX;
+			ValidFwd = 1'b0;
 		end	
 
 		///////////////////////////////////////////////////////////////
@@ -169,7 +173,7 @@ always @(*) begin
 		5'b10000 : begin // ST
 			RegDst = 2'bXX;	// Don't care about RegDst as RegWrite is not asserted
 			ALUOp = 4'b0100;// ALU add
-			MemToReg = 1'b1;// Although nothing going to register, this sets dirty bit for forwarding
+			ValidFwd = 1'b0;
 			MemWrite = 1'b1;
 			ALUSrc = 2'b01;
 		end
@@ -177,6 +181,7 @@ always @(*) begin
 			RegDst = 2'b00;
 			MemRead = 1'b1;	
 			MemToReg = 1'b1;
+			ValidFwd = 1'b0;
 			ALUOp = 4'b0100;// ALU add
 			ALUSrc = 2'b01;	
 			RegWrite = 1'b1;

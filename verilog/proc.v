@@ -38,22 +38,23 @@ wire				Branch_cntrl,		Branch_cntrl_p2;
 wire				ALU_Cin_cntrl,		ALU_Cin_cntrl_p2;
 wire				ALU_InvA_cntrl,		ALU_InvA_cntrl_p2;
 wire				ALU_InvB_cntrl,		ALU_InvB_cntrl_p2;
-wire				RegToPc_cntrl,		RegToPc_cntrl_p2,	RegToPc_cntrl_p3;
 wire				MemRead_cntrl,		MemRead_cntrl_p2,	MemRead_cntrl_p3;
 wire				MemWrite_cntrl,		MemWrite_cntrl_p2,	MemWrite_cntrl_p3;
+wire				RegToPc_cntrl,		RegToPc_cntrl_p2,	RegToPc_cntrl_p3,	RegToPc_cntrl_p4; // TODO - remove pipelined p3/p4
 wire				PcToReg_cntrl,		PcToReg_cntrl_p2,	PcToReg_cntrl_p3,	PcToReg_cntrl_p4;
 wire				RegWrite_cntrl,		RegWrite_cntrl_p2,	RegWrite_cntrl_p3,	RegWrite_cntrl_p4;
 wire				MemToReg_cntrl,		MemToReg_cntrl_p2,	MemToReg_cntrl_p3, 	MemToReg_cntrl_p4;
+wire				ValidFwd_cntrl,		ValidFwd_cntrl_p2,	ValidFwd_cntrl_p3,	ValidFwd_cntrl_p4;
 wire [1:0] 			ALUSrc_cntrl,		ALUSrc_cntrl_p2;
 wire [2:0]			Write_reg_sel,		Write_reg_sel_p2,	Write_reg_sel_p3,	Write_reg_sel_p4; 
 wire [3:0]			ALUOp_cntrl, 		ALUOp_cntrl_p2;
 wire [15:0]						PC_Next;
 wire [15:0]			Read1data,		Read1data_p2;
 wire [15:0]			Read2data, 		Read2data_p2,		Read2data_p3;
-wire [15:0]			Writeback_data;
+wire [15:0]												Writeback_data;
 wire [15:0] 	Instruction,	Instruction_p1, 	Instruction_p2;
 wire [15:0]									Memory_read_data,	Memory_read_data_p4;
-wire [15:0]			ALU_Out,		ALU_Out_p2,		ALU_Out_p3,		ALU_Out_p4;
+wire [15:0]						ALU_Out,		ALU_Out_p3,		ALU_Out_p4;
 wire [15:0] 	PC_Inc,		PC_Inc_p1,		PC_Inc_p2,		PC_Inc_p3, 		PC_Inc_p4;
 
 
@@ -97,6 +98,7 @@ decode decode(
 	.ALU_Cin_cntrl(ALU_Cin_cntrl),
 	.ALUOp_cntrl(ALUOp_cntrl),
 	.ALUSrc_cntrl(ALUSrc_cntrl),
+	.ValidFwd_cntrl(ValidFwd_cntrl),
 	.Halt_cntrl(Halt_cntrl),
 	.SIIC_cntrl(SIIC_cntrl),
 	.Write_reg_sel_out(Write_reg_sel),
@@ -113,7 +115,7 @@ decode decode(
 );
 
 
-dff pipe_decode_p2[85:0](.clk(clk), .rst(rst | PCSrc_cntrl),
+dff pipe_decode_p2[86:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 	.d({	
 		Read1data,
 		Read2data,
@@ -134,7 +136,8 @@ dff pipe_decode_p2[85:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 		RegWrite_cntrl,
 		Write_reg_sel,
 		MemToReg_cntrl,
-		Halt_cntrl
+		Halt_cntrl,
+		ValidFwd_cntrl
 	}),
 	.q({
 		Read1data_p2,
@@ -156,8 +159,9 @@ dff pipe_decode_p2[85:0](.clk(clk), .rst(rst | PCSrc_cntrl),
 		RegWrite_cntrl_p2,
 		Write_reg_sel_p2,
 		MemToReg_cntrl_p2,
-		Halt_cntrl_p2}
-	)
+		Halt_cntrl_p2,
+		ValidFwd_cntrl_p2
+	})
 );
 
 execute execute(
@@ -180,9 +184,11 @@ execute execute(
 );
 
 
-dff pipe_execute_p3[56:0](.clk(clk), .rst(rst),
-	.d({ALU_Out,    MemWrite_cntrl_p2, MemRead_cntrl_p2, Read2data_p2, MemToReg_cntrl_p2, PcToReg_cntrl_p2, PC_Inc_p2, Write_reg_sel_p2, RegWrite_cntrl_p2, Halt_cntrl_p2}),
-	.q({ALU_Out_p3, MemWrite_cntrl_p3, MemRead_cntrl_p3, Read2data_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, PC_Inc_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3}));
+dff pipe_execute_p3[58:0](.clk(clk), .rst(rst),
+	.d({
+		ALU_Out,   
+		MemWrite_cntrl_p2, MemRead_cntrl_p2, Read2data_p2, MemToReg_cntrl_p2, PcToReg_cntrl_p2, RegToPc_cntrl_p2, PC_Inc_p2, Write_reg_sel_p2, RegWrite_cntrl_p2, Halt_cntrl_p2, ValidFwd_cntrl_p2}),
+	.q({ALU_Out_p3, MemWrite_cntrl_p3, MemRead_cntrl_p3, Read2data_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, RegToPc_cntrl_p3, PC_Inc_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3, ValidFwd_cntrl_p3}));
 
 memory memory(
 	// Outputs
@@ -197,9 +203,9 @@ memory memory(
 	.rst(rst)
 );
 
-dff pipe_memory_p4[54:0](.clk(clk), .rst(rst), 
-	.d({Memory_read_data,    PC_Inc_p3, ALU_Out_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3}),
-	.q({Memory_read_data_p4, PC_Inc_p4, ALU_Out_p4, MemToReg_cntrl_p4, PcToReg_cntrl_p4, Write_reg_sel_p4, RegWrite_cntrl_p4, Halt_cntrl_p4})
+dff pipe_memory_p4[56:0](.clk(clk), .rst(rst), 
+	.d({Memory_read_data,    PC_Inc_p3, ALU_Out_p3, MemToReg_cntrl_p3, PcToReg_cntrl_p3, RegToPc_cntrl_p3, Write_reg_sel_p3, RegWrite_cntrl_p3, Halt_cntrl_p3, ValidFwd_cntrl_p3}),
+	.q({Memory_read_data_p4, PC_Inc_p4, ALU_Out_p4, MemToReg_cntrl_p4, PcToReg_cntrl_p4, RegToPc_cntrl_p4, Write_reg_sel_p4, RegWrite_cntrl_p4, Halt_cntrl_p4, ValidFwd_cntrl_p4})
 );
 
 writeback writeback(
@@ -224,9 +230,9 @@ writeback writeback(
  */
 assign Forwarding_data   = {Writeback_data, ALU_Out_p3, ALU_Out};
 assign Forwarding_vector = {
-	~MemToReg_cntrl_p4, Write_reg_sel_p4,
-	~MemToReg_cntrl_p3, Write_reg_sel_p3,
-	~MemToReg_cntrl_p2, Write_reg_sel_p2
+	ValidFwd_cntrl_p4, Write_reg_sel_p4,
+	ValidFwd_cntrl_p3, Write_reg_sel_p3,
+	ValidFwd_cntrl_p2, Write_reg_sel_p2
 	};
 
 endmodule // proc
