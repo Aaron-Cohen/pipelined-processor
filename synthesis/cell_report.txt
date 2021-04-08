@@ -3,7 +3,7 @@
 Report : cell
 Design : proc
 Version: Q-2019.12-SP3
-Date   : Wed Mar 24 20:12:18 2021
+Date   : Thu Apr  8 15:08:30 2021
 ****************************************
 
 Attributes:
@@ -15,57 +15,399 @@ Attributes:
 
 Cell                      Reference       Library             Area  Attributes
 --------------------------------------------------------------------------------
-U1                        BUFX2           gscl45nm        2.346500  
-U2                        INVX1           gscl45nm        1.407900  
-U3                        INVX1           gscl45nm        1.407900  
-U4                        INVX1           gscl45nm        1.407900  
-U5                        INVX1           gscl45nm        1.407900  
-U6                        BUFX2           gscl45nm        2.346500  
-U7                        BUFX2           gscl45nm        2.346500  
-U8                        INVX1           gscl45nm        1.407900  
-U9                        INVX1           gscl45nm        1.407900  
-U10                       BUFX2           gscl45nm        2.346500  
-U11                       BUFX2           gscl45nm        2.346500  
-U12                       INVX1           gscl45nm        1.407900  
-U13                       INVX1           gscl45nm        1.407900  
-U14                       INVX1           gscl45nm        1.407900  
-U15                       INVX1           gscl45nm        1.407900  
-U16                       BUFX2           gscl45nm        2.346500  
-U17                       BUFX2           gscl45nm        2.346500  
-U18                       INVX1           gscl45nm        1.407900  
-U19                       INVX1           gscl45nm        1.407900  
-U20                       BUFX2           gscl45nm        2.346500  
-U21                       INVX1           gscl45nm        1.407900  
-U22                       INVX1           gscl45nm        1.407900  
-U23                       BUFX2           gscl45nm        2.346500  
-U24                       BUFX2           gscl45nm        2.346500  
-U25                       INVX1           gscl45nm        1.407900  
-U26                       INVX1           gscl45nm        1.407900  
-U27                       BUFX4           gscl45nm        2.815800  
-U28                       BUFX2           gscl45nm        2.346500  
-U29                       INVX1           gscl45nm        1.407900  
-U30                       INVX4           gscl45nm        3.285100  
-U31                       INVX1           gscl45nm        1.407900  
-U32                       INVX1           gscl45nm        1.407900  
-U33                       BUFX2           gscl45nm        2.346500  
-U34                       INVX4           gscl45nm        3.285100  
-U35                       INVX1           gscl45nm        1.407900  
-U36                       INVX1           gscl45nm        1.407900  
-U37                       INVX1           gscl45nm        1.407900  
-U39                       INVX1           gscl45nm        1.407900  
-U40                       BUFX2           gscl45nm        2.346500  
-U41                       BUFX2           gscl45nm        2.346500  
-U42                       INVX1           gscl45nm        1.407900  
-decode                    decode                          4558.780124
+U40                       NAND2X1         gscl45nm        1.877200  
+U41                       AOI22X1         gscl45nm        3.285100  
+U43                       NAND2X1         gscl45nm        1.877200  
+U44                       AOI22X1         gscl45nm        3.285100  
+U46                       NAND2X1         gscl45nm        1.877200  
+U47                       AOI22X1         gscl45nm        3.285100  
+U49                       NAND2X1         gscl45nm        1.877200  
+U50                       AOI22X1         gscl45nm        3.285100  
+U52                       NAND2X1         gscl45nm        1.877200  
+U53                       AOI22X1         gscl45nm        3.285100  
+U55                       NAND2X1         gscl45nm        1.877200  
+U56                       AOI22X1         gscl45nm        3.285100  
+U58                       NAND2X1         gscl45nm        1.877200  
+U59                       AOI22X1         gscl45nm        3.285100  
+U61                       NAND2X1         gscl45nm        1.877200  
+U62                       AOI22X1         gscl45nm        3.285100  
+U64                       NAND2X1         gscl45nm        1.877200  
+U65                       AOI22X1         gscl45nm        3.285100  
+U67                       NAND2X1         gscl45nm        1.877200  
+U68                       AOI22X1         gscl45nm        3.285100  
+U70                       NAND2X1         gscl45nm        1.877200  
+U71                       AOI22X1         gscl45nm        3.285100  
+U73                       NAND2X1         gscl45nm        1.877200  
+U74                       AOI22X1         gscl45nm        3.285100  
+U76                       NAND2X1         gscl45nm        1.877200  
+U77                       AOI22X1         gscl45nm        3.285100  
+U79                       NAND2X1         gscl45nm        1.877200  
+U80                       AOI22X1         gscl45nm        3.285100  
+U82                       NAND2X1         gscl45nm        1.877200  
+U83                       AOI22X1         gscl45nm        3.285100  
+U85                       NAND2X1         gscl45nm        1.877200  
+U86                       AOI22X1         gscl45nm        3.285100  
+U88                       INVX2           gscl45nm        1.877200  
+U89                       INVX4           gscl45nm        3.285100  
+U90                       INVX8           gscl45nm        3.285100  
+U91                       INVX8           gscl45nm        3.285100  
+U92                       INVX8           gscl45nm        3.285100  
+U93                       BUFX2           gscl45nm        2.346500  
+U94                       INVX2           gscl45nm        1.877200  
+U95                       AND2X1          gscl45nm        2.346500  
+U96                       INVX1           gscl45nm        1.407900  
+U97                       INVX1           gscl45nm        1.407900  
+U98                       INVX1           gscl45nm        1.407900  
+U99                       INVX1           gscl45nm        1.407900  
+U100                      INVX2           gscl45nm        1.877200  
+U101                      OR2X2           gscl45nm        2.815800  
+U102                      INVX4           gscl45nm        3.285100  
+U103                      INVX4           gscl45nm        3.285100  
+U104                      INVX2           gscl45nm        1.877200  
+U105                      INVX2           gscl45nm        1.877200  
+U106                      INVX2           gscl45nm        1.877200  
+U107                      INVX4           gscl45nm        3.285100  
+U108                      MUX2X1          gscl45nm        3.754400  
+U109                      INVX1           gscl45nm        1.407900  
+U110                      MUX2X1          gscl45nm        3.754400  
+U111                      BUFX2           gscl45nm        2.346500  
+U112                      INVX1           gscl45nm        1.407900  
+U113                      BUFX2           gscl45nm        2.346500  
+U114                      INVX1           gscl45nm        1.407900  
+U115                      AND2X2          gscl45nm        2.815800  
+U116                      INVX1           gscl45nm        1.407900  
+U117                      AND2X2          gscl45nm        2.815800  
+U118                      INVX1           gscl45nm        1.407900  
+U119                      AND2X2          gscl45nm        2.815800  
+U120                      INVX1           gscl45nm        1.407900  
+U121                      AND2X2          gscl45nm        2.815800  
+U122                      INVX1           gscl45nm        1.407900  
+U123                      AND2X2          gscl45nm        2.815800  
+U124                      INVX1           gscl45nm        1.407900  
+U125                      AND2X2          gscl45nm        2.815800  
+U126                      INVX1           gscl45nm        1.407900  
+U127                      AND2X2          gscl45nm        2.815800  
+U128                      INVX1           gscl45nm        1.407900  
+U129                      AND2X2          gscl45nm        2.815800  
+U130                      INVX1           gscl45nm        1.407900  
+U131                      AND2X2          gscl45nm        2.815800  
+U132                      INVX1           gscl45nm        1.407900  
+U133                      AND2X2          gscl45nm        2.815800  
+U134                      INVX1           gscl45nm        1.407900  
+U135                      AND2X2          gscl45nm        2.815800  
+U136                      INVX1           gscl45nm        1.407900  
+U137                      AND2X2          gscl45nm        2.815800  
+U138                      INVX1           gscl45nm        1.407900  
+U139                      AND2X2          gscl45nm        2.815800  
+U140                      INVX1           gscl45nm        1.407900  
+U141                      AND2X2          gscl45nm        2.815800  
+U142                      INVX1           gscl45nm        1.407900  
+U143                      AND2X2          gscl45nm        2.815800  
+U144                      INVX1           gscl45nm        1.407900  
+U145                      AND2X2          gscl45nm        2.815800  
+U146                      INVX1           gscl45nm        1.407900  
+U147                      MUX2X1          gscl45nm        3.754400  
+U148                      INVX1           gscl45nm        1.407900  
+U149                      INVX1           gscl45nm        1.407900  
+U150                      INVX1           gscl45nm        1.407900  
+U151                      MUX2X1          gscl45nm        3.754400  
+U152                      INVX1           gscl45nm        1.407900  
+U153                      INVX1           gscl45nm        1.407900  
+U154                      NAND2X1         gscl45nm        1.877200  
+U155                      NAND2X1         gscl45nm        1.877200  
+U156                      MUX2X1          gscl45nm        3.754400  
+U157                      BUFX2           gscl45nm        2.346500  
+U158                      BUFX2           gscl45nm        2.346500  
+U159                      MUX2X1          gscl45nm        3.754400  
+U160                      BUFX2           gscl45nm        2.346500  
+U161                      BUFX2           gscl45nm        2.346500  
+U162                      BUFX2           gscl45nm        2.346500  
+U163                      BUFX2           gscl45nm        2.346500  
+U164                      MUX2X1          gscl45nm        3.754400  
+U165                      INVX1           gscl45nm        1.407900  
+U166                      INVX1           gscl45nm        1.407900  
+U167                      BUFX2           gscl45nm        2.346500  
+U168                      BUFX2           gscl45nm        2.346500  
+U169                      BUFX2           gscl45nm        2.346500  
+U170                      BUFX2           gscl45nm        2.346500  
+U171                      BUFX2           gscl45nm        2.346500  
+U172                      BUFX2           gscl45nm        2.346500  
+U173                      BUFX2           gscl45nm        2.346500  
+U174                      OR2X2           gscl45nm        2.815800  
+U175                      INVX1           gscl45nm        1.407900  
+U176                      INVX1           gscl45nm        1.407900  
+U177                      INVX1           gscl45nm        1.407900  
+U178                      AND2X1          gscl45nm        2.346500  
+U179                      INVX1           gscl45nm        1.407900  
+U180                      INVX1           gscl45nm        1.407900  
+U181                      INVX1           gscl45nm        1.407900  
+U182                      INVX1           gscl45nm        1.407900  
+U183                      INVX1           gscl45nm        1.407900  
+U184                      INVX1           gscl45nm        1.407900  
+U185                      INVX1           gscl45nm        1.407900  
+U186                      INVX1           gscl45nm        1.407900  
+U187                      INVX1           gscl45nm        1.407900  
+U188                      INVX1           gscl45nm        1.407900  
+U189                      INVX1           gscl45nm        1.407900  
+U190                      INVX1           gscl45nm        1.407900  
+U192                      INVX1           gscl45nm        1.407900  
+U193                      BUFX2           gscl45nm        2.346500  
+U194                      NAND3X1         gscl45nm        2.346500  
+U195                      MUX2X1          gscl45nm        3.754400  
+U196                      MUX2X1          gscl45nm        3.754400  
+U197                      MUX2X1          gscl45nm        3.754400  
+U198                      MUX2X1          gscl45nm        3.754400  
+U199                      MUX2X1          gscl45nm        3.754400  
+U200                      MUX2X1          gscl45nm        3.754400  
+U201                      MUX2X1          gscl45nm        3.754400  
+U202                      MUX2X1          gscl45nm        3.754400  
+decode                    decode                          4681.267408
                                                                     h, n
-execute                   execute                         4587.876723
+execute                   execute                         4553.148524
                                                                     h
-fetch                     fetch                           17335.472384
+fetch                     fetch                           15084.240327
                                                                     h, n
-memory                    memory                          16057.568487
+memory                    memory                          15241.925135
                                                                     h, n
-writeback                 writeback                       247.321096
+pipe_decode_p2[0]         dff_275                         11.732500 h, n
+pipe_decode_p2[1]         dff_276                         11.732500 h, n
+pipe_decode_p2[2]         dff_277                         11.732500 h, n
+pipe_decode_p2[3]         dff_278                         11.732500 h, n
+pipe_decode_p2[4]         dff_279                         11.732500 h, n
+pipe_decode_p2[5]         dff_280                         11.732500 h, n
+pipe_decode_p2[6]         dff_281                         11.732500 h, n
+pipe_decode_p2[7]         dff_282                         11.732500 h, n
+pipe_decode_p2[8]         dff_283                         11.732500 h, n
+pipe_decode_p2[9]         dff_284                         11.732500 h, n
+pipe_decode_p2[10]        dff_285                         11.732500 h, n
+pipe_decode_p2[11]        dff_286                         11.732500 h, n
+pipe_decode_p2[12]        dff_287                         11.732500 h, n
+pipe_decode_p2[13]        dff_288                         11.732500 h, n
+pipe_decode_p2[14]        dff_289                         11.732500 h, n
+pipe_decode_p2[15]        dff_290                         11.732500 h, n
+pipe_decode_p2[16]        dff_291                         11.732500 h, n
+pipe_decode_p2[17]        dff_292                         11.732500 h, n
+pipe_decode_p2[18]        dff_293                         11.732500 h, n
+pipe_decode_p2[19]        dff_294                         11.732500 h, n
+pipe_decode_p2[20]        dff_295                         11.732500 h, n
+pipe_decode_p2[21]        dff_296                         11.732500 h, n
+pipe_decode_p2[22]        dff_297                         11.732500 h, n
+pipe_decode_p2[23]        dff_298                         11.732500 h, n
+pipe_decode_p2[24]        dff_299                         11.732500 h, n
+pipe_decode_p2[25]        dff_300                         11.732500 h, n
+pipe_decode_p2[26]        dff_301                         11.732500 h, n
+pipe_decode_p2[27]        dff_302                         11.732500 h, n
+pipe_decode_p2[28]        dff_303                         11.732500 h, n
+pipe_decode_p2[29]        dff_304                         11.732500 h, n
+pipe_decode_p2[30]        dff_305                         11.732500 h, n
+pipe_decode_p2[31]        dff_306                         11.732500 h, n
+pipe_decode_p2[32]        dff_307                         11.732500 h, n
+pipe_decode_p2[33]        dff_308                         11.732500 h, n
+pipe_decode_p2[34]        dff_309                         11.732500 h, n
+pipe_decode_p2[35]        dff_310                         11.732500 h, n
+pipe_decode_p2[36]        dff_311                         11.732500 h, n
+pipe_decode_p2[37]        dff_312                         11.732500 h, n
+pipe_decode_p2[38]        dff_313                         11.732500 h, n
+pipe_decode_p2[39]        dff_314                         11.732500 h, n
+pipe_decode_p2[40]        dff_315                         11.732500 h, n
+pipe_decode_p2[41]        dff_316                         11.732500 h, n
+pipe_decode_p2[42]        dff_317                         11.732500 h, n
+pipe_decode_p2[43]        dff_318                         11.732500 h, n
+pipe_decode_p2[44]        dff_319                         11.732500 h, n
+pipe_decode_p2[45]        dff_320                         11.732500 h, n
+pipe_decode_p2[46]        dff_321                         11.732500 h, n
+pipe_decode_p2[47]        dff_322                         11.732500 h, n
+pipe_decode_p2[48]        dff_323                         11.732500 h, n
+pipe_decode_p2[49]        dff_324                         11.732500 h, n
+pipe_decode_p2[50]        dff_325                         11.732500 h, n
+pipe_decode_p2[51]        dff_326                         11.732500 h, n
+pipe_decode_p2[52]        dff_327                         11.732500 h, n
+pipe_decode_p2[53]        dff_328                         11.732500 h, n
+pipe_decode_p2[54]        dff_329                         11.732500 h, n
+pipe_decode_p2[55]        dff_330                         11.732500 h, n
+pipe_decode_p2[56]        dff_331                         11.732500 h, n
+pipe_decode_p2[57]        dff_332                         11.732500 h, n
+pipe_decode_p2[58]        dff_333                         11.732500 h, n
+pipe_decode_p2[59]        dff_334                         11.732500 h, n
+pipe_decode_p2[60]        dff_335                         11.732500 h, n
+pipe_decode_p2[61]        dff_336                         11.732500 h, n
+pipe_decode_p2[62]        dff_337                         11.732500 h, n
+pipe_decode_p2[63]        dff_338                         11.732500 h, n
+pipe_decode_p2[64]        dff_339                         11.732500 h, n
+pipe_decode_p2[65]        dff_340                         11.732500 h, n
+pipe_decode_p2[66]        dff_341                         11.732500 h, n
+pipe_decode_p2[67]        dff_342                         11.732500 h, n
+pipe_decode_p2[68]        dff_343                         11.732500 h, n
+pipe_decode_p2[69]        dff_344                         11.732500 h, n
+pipe_decode_p2[70]        dff_345                         11.732500 h, n
+pipe_decode_p2[71]        dff_346                         11.732500 h, n
+pipe_decode_p2[72]        dff_347                         11.732500 h, n
+pipe_decode_p2[73]        dff_348                         11.732500 h, n
+pipe_decode_p2[74]        dff_349                         11.732500 h, n
+pipe_decode_p2[75]        dff_350                         11.732500 h, n
+pipe_decode_p2[76]        dff_351                         11.732500 h, n
+pipe_decode_p2[77]        dff_352                         11.732500 h, n
+pipe_decode_p2[78]        dff_353                         11.732500 h, n
+pipe_decode_p2[79]        dff_354                         11.732500 h, n
+pipe_decode_p2[80]        dff_355                         11.732500 h, n
+pipe_decode_p2[81]        dff_356                         11.732500 h, n
+pipe_decode_p2[82]        dff_357                         11.732500 h, n
+pipe_decode_p2[83]        dff_358                         11.732500 h, n
+pipe_decode_p2[84]        dff_359                         11.732500 h, n
+pipe_decode_p2[85]        dff_360                         11.732500 h, n
+pipe_decode_p2[86]        dff_361                         11.732500 h, n
+pipe_decode_p2[87]        dff_362                         11.732500 h, n
+pipe_decode_p2[88]        dff_363                         11.732500 h, n
+pipe_execute_p3[0]        dff_216                         11.732500 h, n
+pipe_execute_p3[1]        dff_217                         11.732500 h, n
+pipe_execute_p3[2]        dff_218                         11.732500 h, n
+pipe_execute_p3[3]        dff_219                         11.732500 h, n
+pipe_execute_p3[4]        dff_220                         11.732500 h, n
+pipe_execute_p3[5]        dff_221                         11.732500 h, n
+pipe_execute_p3[6]        dff_222                         11.732500 h, n
+pipe_execute_p3[7]        dff_223                         11.732500 h, n
+pipe_execute_p3[8]        dff_224                         11.732500 h, n
+pipe_execute_p3[9]        dff_225                         11.732500 h, n
+pipe_execute_p3[10]       dff_226                         11.732500 h, n
+pipe_execute_p3[11]       dff_227                         11.732500 h, n
+pipe_execute_p3[12]       dff_228                         11.732500 h, n
+pipe_execute_p3[13]       dff_229                         11.732500 h, n
+pipe_execute_p3[14]       dff_230                         11.732500 h, n
+pipe_execute_p3[15]       dff_231                         11.732500 h, n
+pipe_execute_p3[16]       dff_232                         11.732500 h, n
+pipe_execute_p3[17]       dff_233                         11.732500 h, n
+pipe_execute_p3[18]       dff_234                         11.732500 h, n
+pipe_execute_p3[19]       dff_235                         11.732500 h, n
+pipe_execute_p3[20]       dff_236                         11.732500 h, n
+pipe_execute_p3[21]       dff_237                         11.732500 h, n
+pipe_execute_p3[22]       dff_238                         11.732500 h, n
+pipe_execute_p3[23]       dff_239                         11.732500 h, n
+pipe_execute_p3[24]       dff_240                         11.732500 h, n
+pipe_execute_p3[25]       dff_241                         11.732500 h, n
+pipe_execute_p3[26]       dff_242                         11.732500 h, n
+pipe_execute_p3[27]       dff_243                         11.732500 h, n
+pipe_execute_p3[28]       dff_244                         11.732500 h, n
+pipe_execute_p3[29]       dff_245                         11.732500 h, n
+pipe_execute_p3[30]       dff_246                         11.732500 h, n
+pipe_execute_p3[31]       dff_247                         11.732500 h, n
+pipe_execute_p3[32]       dff_248                         11.732500 h, n
+pipe_execute_p3[33]       dff_249                         11.732500 h, n
+pipe_execute_p3[34]       dff_250                         11.732500 h, n
+pipe_execute_p3[35]       dff_251                         11.732500 h, n
+pipe_execute_p3[36]       dff_252                         11.732500 h, n
+pipe_execute_p3[37]       dff_253                         11.732500 h, n
+pipe_execute_p3[38]       dff_254                         11.732500 h, n
+pipe_execute_p3[39]       dff_255                         11.732500 h, n
+pipe_execute_p3[40]       dff_256                         11.732500 h, n
+pipe_execute_p3[41]       dff_257                         11.732500 h, n
+pipe_execute_p3[42]       dff_258                         11.732500 h, n
+pipe_execute_p3[43]       dff_259                         11.732500 h, n
+pipe_execute_p3[44]       dff_260                         11.732500 h, n
+pipe_execute_p3[45]       dff_261                         11.732500 h, n
+pipe_execute_p3[46]       dff_262                         11.732500 h, n
+pipe_execute_p3[47]       dff_263                         11.732500 h, n
+pipe_execute_p3[48]       dff_264                         11.732500 h, n
+pipe_execute_p3[49]       dff_265                         11.732500 h, n
+pipe_execute_p3[50]       dff_266                         11.732500 h, n
+pipe_execute_p3[51]       dff_267                         11.732500 h, n
+pipe_execute_p3[52]       dff_268                         11.732500 h, n
+pipe_execute_p3[53]       dff_269                         11.732500 h, n
+pipe_execute_p3[54]       dff_270                         11.732500 h, n
+pipe_execute_p3[55]       dff_271                         11.732500 h, n
+pipe_execute_p3[56]       dff_272                         11.732500 h, n
+pipe_execute_p3[57]       dff_273                         11.732500 h, n
+pipe_execute_p3[58]       dff_274                         11.732500 h, n
+pipe_fetch[0]             dff_365                         11.732500 h, n
+pipe_fetch[1]             dff_366                         11.732500 h, n
+pipe_fetch[2]             dff_367                         11.732500 h, n
+pipe_fetch[3]             dff_368                         11.732500 h, n
+pipe_fetch[4]             dff_369                         11.732500 h, n
+pipe_fetch[5]             dff_370                         11.732500 h, n
+pipe_fetch[6]             dff_371                         11.732500 h, n
+pipe_fetch[7]             dff_372                         11.732500 h, n
+pipe_fetch[8]             dff_373                         11.732500 h, n
+pipe_fetch[9]             dff_374                         11.732500 h, n
+pipe_fetch[10]            dff_375                         11.732500 h, n
+pipe_fetch[11]            dff_376                         11.732500 h, n
+pipe_fetch[12]            dff_377                         11.732500 h, n
+pipe_fetch[13]            dff_378                         11.732500 h, n
+pipe_fetch[14]            dff_379                         11.732500 h, n
+pipe_fetch[15]            dff_380                         11.732500 h, n
+pipe_fetch[16]            dff_381                         11.732500 h, n
+pipe_fetch[17]            dff_382                         11.732500 h, n
+pipe_fetch[18]            dff_383                         11.732500 h, n
+pipe_fetch[19]            dff_384                         11.732500 h, n
+pipe_fetch[20]            dff_385                         11.732500 h, n
+pipe_fetch[21]            dff_386                         11.732500 h, n
+pipe_fetch[22]            dff_387                         11.732500 h, n
+pipe_fetch[23]            dff_388                         11.732500 h, n
+pipe_fetch[24]            dff_389                         11.732500 h, n
+pipe_fetch[25]            dff_390                         11.732500 h, n
+pipe_fetch[26]            dff_391                         11.732500 h, n
+pipe_fetch[27]            dff_392                         11.732500 h, n
+pipe_fetch[28]            dff_393                         11.732500 h, n
+pipe_fetch[29]            dff_394                         11.732500 h, n
+pipe_fetch[30]            dff_395                         11.732500 h, n
+pipe_fetch[31]            dff_396                         11.732500 h, n
+pipe_fetch[32]            dff_397                         11.732500 h, n
+pipe_memory_p4[0]         dff_160                         11.732500 h, n
+pipe_memory_p4[1]         dff_161                         11.732500 h, n
+pipe_memory_p4[2]         dff_162                         11.732500 h, n
+pipe_memory_p4[3]         dff_163                         11.732500 h, n
+pipe_memory_p4[4]         dff_164                         11.732500 h, n
+pipe_memory_p4[5]         dff_165                         11.732500 h, n
+pipe_memory_p4[6]         dff_166                         11.732500 h, n
+pipe_memory_p4[7]         dff_167                         11.732500 h, n
+pipe_memory_p4[8]         dff_168                         11.732500 h, n
+pipe_memory_p4[9]         dff_169                         11.732500 h, n
+pipe_memory_p4[10]        dff_170                         11.732500 h, n
+pipe_memory_p4[11]        dff_171                         11.732500 h, n
+pipe_memory_p4[12]        dff_172                         11.732500 h, n
+pipe_memory_p4[13]        dff_173                         11.732500 h, n
+pipe_memory_p4[14]        dff_174                         11.732500 h, n
+pipe_memory_p4[15]        dff_175                         11.732500 h, n
+pipe_memory_p4[16]        dff_176                         11.732500 h, n
+pipe_memory_p4[17]        dff_177                         11.732500 h, n
+pipe_memory_p4[18]        dff_178                         11.732500 h, n
+pipe_memory_p4[19]        dff_179                         11.732500 h, n
+pipe_memory_p4[20]        dff_180                         11.732500 h, n
+pipe_memory_p4[21]        dff_181                         11.732500 h, n
+pipe_memory_p4[22]        dff_182                         11.732500 h, n
+pipe_memory_p4[23]        dff_183                         11.732500 h, n
+pipe_memory_p4[24]        dff_184                         11.732500 h, n
+pipe_memory_p4[25]        dff_185                         11.732500 h, n
+pipe_memory_p4[26]        dff_186                         11.732500 h, n
+pipe_memory_p4[27]        dff_187                         11.732500 h, n
+pipe_memory_p4[28]        dff_188                         11.732500 h, n
+pipe_memory_p4[29]        dff_189                         11.732500 h, n
+pipe_memory_p4[30]        dff_190                         11.732500 h, n
+pipe_memory_p4[31]        dff_191                         11.732500 h, n
+pipe_memory_p4[32]        dff_192                         11.732500 h, n
+pipe_memory_p4[33]        dff_193                         11.732500 h, n
+pipe_memory_p4[34]        dff_194                         11.732500 h, n
+pipe_memory_p4[35]        dff_195                         11.732500 h, n
+pipe_memory_p4[36]        dff_196                         11.732500 h, n
+pipe_memory_p4[37]        dff_197                         11.732500 h, n
+pipe_memory_p4[38]        dff_198                         11.732500 h, n
+pipe_memory_p4[39]        dff_199                         11.732500 h, n
+pipe_memory_p4[40]        dff_200                         11.732500 h, n
+pipe_memory_p4[41]        dff_201                         11.732500 h, n
+pipe_memory_p4[42]        dff_202                         11.732500 h, n
+pipe_memory_p4[43]        dff_203                         11.732500 h, n
+pipe_memory_p4[44]        dff_204                         11.732500 h, n
+pipe_memory_p4[45]        dff_205                         11.732500 h, n
+pipe_memory_p4[46]        dff_206                         11.732500 h, n
+pipe_memory_p4[47]        dff_207                         11.732500 h, n
+pipe_memory_p4[48]        dff_208                         11.732500 h, n
+pipe_memory_p4[49]        dff_209                         11.732500 h, n
+pipe_memory_p4[50]        dff_210                         11.732500 h, n
+pipe_memory_p4[51]        dff_211                         11.732500 h, n
+pipe_memory_p4[52]        dff_212                         11.732500 h, n
+pipe_memory_p4[53]        dff_213                         11.732500 h, n
+pipe_memory_p4[54]        dff_214                         11.732500 h, n
+pipe_memory_p4[55]        dff_215                         11.732500 h, n
+writeback                 writeback                       157.684798
                                                                     h
 --------------------------------------------------------------------------------
-Total 46 cells                                            42863.045412
+Total 388 cells                                           42838.172523
 1

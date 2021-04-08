@@ -48,13 +48,20 @@ waves:
 	vsim -view dataset=dump.wlf
 check_synth:
 	../scripts/check_synth.sh
+
+synth:
+	../scripts/synth.sh
 d:
 	vim diff.ptrace
 i:
 	vim ../../demo2/tests/inst_tests/siic_0.asm
+c:
+	cat ../../demo2/tests/inst_tests/siic_0.asm
 v:
 	vim verilogsim.ptrace
 a:	
 	vim archsim.ptrace
+s: 
+	vim siic.ptrace
 todo:
 	../scripts/todo.sh

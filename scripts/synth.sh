@@ -1,6 +1,7 @@
 #!/bin/sh
 clear
 
+echo "\033[0;36mBeginning synthesis\33[0m"
 cd ..
 rm -rf synthesis
 cd verilog
@@ -12,5 +13,3 @@ mv ./synth ../synthesis
 # Now that console is no longer being written to, show the test failures
 grep --color=always -s "Latch" log.of.synthesis
 rm -f log.of.synthesis
-vcheck_all.sh
-findslack.sh

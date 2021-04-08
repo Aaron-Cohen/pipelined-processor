@@ -3,7 +3,7 @@
 Report : area
 Design : proc
 Version: Q-2019.12-SP3
-Date   : Wed Mar 24 20:12:17 2021
+Date   : Thu Apr  8 15:08:30 2021
 ****************************************
 
 Information: Updating design information... (UID-85)
@@ -12,21 +12,21 @@ Library(s) Used:
 
     gscl45nm (File: /u/k/a/karu/courses/cs552/cad/Synopsys_Libraries/libs/gscl45nm.db)
 
-Number of ports:                         2114
-Number of nets:                         17647
-Number of cells:                        15783
-Number of combinational cells:          14349
-Number of sequential cells:              1184
+Number of ports:                         3239
+Number of nets:                         18268
+Number of cells:                        15517
+Number of combinational cells:          13604
+Number of sequential cells:              1422
 Number of macros/black boxes:               0
-Number of buf/inv:                       6252
-Number of references:                       9
+Number of buf/inv:                       4656
+Number of references:                     254
 
-Combinational area:              33414.628721
-Buf/Inv area:                    10670.473868
-Noncombinational area:            9448.416691
+Combinational area:              31490.968074
+Buf/Inv area:                     7771.607829
+Noncombinational area:           11347.204449
 Macro/Black Box area:                0.000000
 Net Interconnect area:      undefined  (No wire load specified)
 
-Total cell area:                 42863.045412
+Total cell area:                 42838.172523
 Total area:                 undefined
 1

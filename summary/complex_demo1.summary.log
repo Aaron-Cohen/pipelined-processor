@@ -1,0 +1,5 @@
+/u/k/a/karu/courses/cs552/fall2020/handouts/testprograms/public/complex_demo1/branchTest.asm SUCCESS CPI:2.8 CYCLES:56 ICOUNT:20 IHITRATE: 0 DHITRATE: 0
+/u/k/a/karu/courses/cs552/fall2020/handouts/testprograms/public/complex_demo1/easyTest.asm SUCCESS CPI:4.4 CYCLES:182 ICOUNT:41 IHITRATE: 0 DHITRATE: 0
+/u/k/a/karu/courses/cs552/fall2020/handouts/testprograms/public/complex_demo1/firstTest.asm SUCCESS CPI:1.2 CYCLES:50 ICOUNT:40 IHITRATE: 0 DHITRATE: 0
+/u/k/a/karu/courses/cs552/fall2020/handouts/testprograms/public/complex_demo1/loadStoreTest.asm SUCCESS CPI:1.3 CYCLES:40 ICOUNT:30 IHITRATE: 0 DHITRATE: 0
+/u/k/a/karu/courses/cs552/fall2020/handouts/testprograms/public/complex_demo1/shiftTest.asm SUCCESS CPI:1.1 CYCLES:104 ICOUNT:97 IHITRATE: 0 DHITRATE: 0

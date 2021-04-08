@@ -7,7 +7,6 @@ module decode(
 	output wire Load_warning_b,
 	output wire Jump_cntrl,
 	output wire Branch_cntrl,
-	output wire MemRead_cntrl,
 	output wire MemToReg_cntrl,
 	output wire MemWrite_cntrl,
 	output wire PcToReg_cntrl,
@@ -17,6 +16,7 @@ module decode(
 	output wire ALU_InvB_cntrl,
 	output wire ALU_Cin_cntrl,
 	output wire SIIC_cntrl,
+	output wire RTI_cntrl,
 	output wire Halt_cntrl,
 	output wire ValidFwd_cntrl,
 	output wire [3:0] ALUOp_cntrl,
@@ -50,7 +50,6 @@ control control(
 	.RegDst(regDst_cntrl),
 	.Jump(Jump_cntrl),
 	.Branch(Branch_cntrl),
-	.MemRead(MemRead_cntrl),
 	.MemToReg(MemToReg_cntrl),
 	.MemWrite(MemWrite_cntrl),
 	.RegWrite(RegWrite_cntrl),
@@ -60,6 +59,7 @@ control control(
 	.ALU_InvB(ALU_InvB_cntrl),
 	.ALU_Cin(ALU_Cin_cntrl),
 	.SIIC(SIIC_cntrl),
+	.RTI(RTI_cntrl),
 	.Halt(Halt_cntrl),
 	.ValidFwd(ValidFwd_cntrl),
 	.err(control_err)
@@ -96,7 +96,7 @@ assign Write_reg_sel_out = PcToReg_cntrl ? 3'h7 :
 // EPC feeds back its output when exception is not asserted, only updated when
 // exception. Writeback data will be the PC+2 from PcToReg being asserted.
 wire[15:0] EPC;
-dff EPC_reg [15:0]( .q(EPC), .d(SIIC_cntrl_in ? Writeback_data : EPC), .rst(rst), .clk(clk));
+dff EPC_reg [15:0]( .q(EPC), .d(SIIC_cntrl_in ? Forwarding_data[31:16] : EPC), .rst(rst), .clk(clk));
 
 // Only use the value from the registers when the current register being read
 // from is not being written to later down the pipeline. If so, grab
@@ -104,7 +104,7 @@ dff EPC_reg [15:0]( .q(EPC), .d(SIIC_cntrl_in ? Writeback_data : EPC), .rst(rst)
 wire [15:0] read1data, read2data;
 
 assign Read1data = 	
-			SIIC_cntrl ? EPC : 
+			RTI_cntrl ? EPC : 
 			Forwarding_vector[3 ] & (Instruction[10:8] == Forwarding_vector[2:0]) ? Forwarding_data[15:0]  :
 			Forwarding_vector[7 ] & (Instruction[10:8] == Forwarding_vector[6:4]) ? Forwarding_data[31:16] :
 			Forwarding_vector[11] & (Instruction[10:8] == Forwarding_vector[10:8]) ? Forwarding_data[47:32] :

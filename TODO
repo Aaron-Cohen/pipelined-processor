@@ -1,7 +1,0 @@
-TODO:
-
-(Maybe not needed?) Move branch resolution to memory stage (currently in decode stage)
-
-Some signals are duplicated as they are analogous in non-pipelined processor, but must differ when pipelining is added (write/read/enables etc)
-
-Add rf bypass

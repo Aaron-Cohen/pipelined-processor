@@ -7,7 +7,6 @@ module control(
 	output reg [1:0] RegDst,
 	output reg Jump,
 	output reg Branch,
-	output reg MemRead,
 	output reg MemWrite,
 	output reg RegWrite,
 	output reg PcToReg,
@@ -17,6 +16,7 @@ module control(
 	output reg ALU_Cin,
 	output reg Halt,
 	output reg SIIC,
+	output reg RTI,
 	output reg err,
 	output reg MemToReg,
 	output reg ValidFwd
@@ -63,12 +63,11 @@ end
 1110	LBI	A<<8 | B
 */
 // Set controls based on opcodes
-// TODO - this next assign statement might not hold once bipelining is added
-//assign MemToReg = MemRead; // If we are electing to read memory, we can assume we want to use it.
 always @(*) begin
 	Halt 	 = 1'b0;
 	err 	 = 1'b0;
 	SIIC     = 1'b0;
+	RTI	 = 1'b0;
 
 	// ALU Control signals
 	ALU_Cin  = 1'b0;
@@ -81,8 +80,7 @@ always @(*) begin
 	RegToPc  = 1'b0;	// JR,  JALR
 	Jump     = 1'b0;	// J*
 	Branch   = 1'b0;	// B*Z
-	MemRead  = 1'b0;	// Loads and load like instructions
-	MemToReg = 1'b0;
+	MemToReg = 1'b0;	// Same as MemRead
 	MemWrite = 1'b0;	// Store and its variants
 	RegWrite = 1'b0;	// R --> R operations
 	ValidFwd = 1'b1;	// Most values can be forwarded
@@ -179,7 +177,6 @@ always @(*) begin
 		end
 		5'b10001 : begin // LD
 			RegDst = 2'b00;
-			MemRead = 1'b1;	
 			MemToReg = 1'b1;
 			ValidFwd = 1'b1;
 			ALUOp = 4'b0100;// ALU add
@@ -362,6 +359,7 @@ always @(*) begin
 			ALUOp = 4'b1111; // ALU A
 			ALUSrc = 4'bXXXX;
 			RegDst = 2'bXX;
+			RTI = 1'b1;
 			RegToPc = 1'b1;
 		end
 		default : begin
